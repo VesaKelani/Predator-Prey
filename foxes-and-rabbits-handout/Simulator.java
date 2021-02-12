@@ -22,10 +22,16 @@ public class Simulator
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    private static final double RABBIT_CREATION_PROBABILITY = 0.05;  
+    // The probability that a snake will be created in any given grid position.
+    private static final double SNAKE_CREATION_PROBABILITY = 0.02;  
+    
+    private static final double FLOWER_CREATION_PROBABILITY = 0.08;  
 
     // List of animals in the field.
     private List<Animal> animals;
+    //list of plants
+    private List<Plant> plants;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -56,12 +62,15 @@ public class Simulator
         }
         
         animals = new ArrayList<>();
+        plants = new ArrayList<>();
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
+        view.setColor(Snake.class, Color.RED);
+        view.setColor(Flower.class, Color.GREEN);
         
         // Setup a valid starting point.
         reset();
@@ -122,6 +131,7 @@ public class Simulator
     {
         step = 0;
         animals.clear();
+        plants.clear();
         populate();
         
         // Show the starting state in the view.
@@ -129,7 +139,7 @@ public class Simulator
     }
     
     /**
-     * Randomly populate the field with foxes and rabbits.
+     * Randomly populate the field with foxes and rabbits AND SNAKE TOO.
      */
     private void populate()
     {
@@ -146,6 +156,16 @@ public class Simulator
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, field, location);
                     animals.add(rabbit);
+                }
+                else if(rand.nextDouble() <= SNAKE_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Snake snake = new Snake(true, field, location);
+                    animals.add(snake);
+                }
+                else if(rand.nextDouble() <= FLOWER_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Flower flower = new Flower(true, field, location);
+                    plants.add(flower);
                 }
                 // else leave the location empty.
             }
