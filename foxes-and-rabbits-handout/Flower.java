@@ -8,7 +8,7 @@ import java.util.*;
 public class Flower extends HabitatFood
 {
     // variables shared by all flowers
-    private static final int MAX_AGE = 50;
+    private static final int MAX_AGE = 500;
     private static final Random rand = Randomizer.getRandom();
     
     //each specific flower age
@@ -39,5 +39,22 @@ public class Flower extends HabitatFood
         if(age > MAX_AGE) {
             setDead();
         }
+    }
+    
+    public void act(List<HabitatFood> newFlowers)
+    {
+        incrementAge();
+        // if(!isAlive()) {
+                      
+            // // Try to move into a free location.
+            // Location newLocation = getField().freeAdjacentLocation(getLocation());
+            // if(newLocation != null) {
+                // setLocation(newLocation);
+            // }
+            // else {
+                // // Overcrowding.
+                // setDead();
+            // }
+        // }
     }
 }

@@ -8,7 +8,7 @@ import java.util.*;
 public class Insect extends HabitatFood
 {
     // instance variables - replace the example below with your own
-    private static final int MAX_AGE = 50;
+    private static final int MAX_AGE = 300;
     private static final Random rand = Randomizer.getRandom();
     
     private int age;
@@ -37,4 +37,11 @@ public class Insect extends HabitatFood
             setDead();
         }
     }
+    
+    public void act(List<HabitatFood> newGrass)
+    {
+        incrementAge();
+    }
+    
+    
 }

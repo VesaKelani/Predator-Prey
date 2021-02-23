@@ -1,4 +1,4 @@
-
+import java.util.*;
 /**
  * Abstract class HabitatFood - write a description of the class here
  *
@@ -13,6 +13,7 @@ public abstract class HabitatFood
     // The animal's position in the field.
     private Location location;
     
+    Random rand = new Random();
     /**
      * An example of a method - replace this comment with your own
      *
@@ -30,6 +31,8 @@ public abstract class HabitatFood
     {
         return location;
     }
+    
+    abstract public void act(List<HabitatFood> food);
     
     protected void setLocation(Location newLocation)
     {
@@ -58,5 +61,9 @@ public abstract class HabitatFood
             location = null;
             field = null;
         }
+    }
+    
+    protected void newFood() {
+        
     }
 }

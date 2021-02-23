@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Grass extends HabitatFood
 {
-    private static final int MAX_AGE = 50;
+    private static final int MAX_AGE = 200;
     private int age;
     private static final Random rand = Randomizer.getRandom();
 
@@ -35,5 +35,10 @@ public class Grass extends HabitatFood
         if(age > MAX_AGE) {
             setDead();
         }
+    }
+    
+    public void act(List<HabitatFood> newGrass)
+    {
+        incrementAge();
     }
 }
