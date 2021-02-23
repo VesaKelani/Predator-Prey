@@ -7,7 +7,9 @@ import java.util.*;
  */
 public class Grass extends HabitatFood
 {
-    private static final int MAX_AGE = 50;
+    private static final int MAX_AGE = 200;
+    private static final double GROW_PROBABILITY = 0.12;
+    private static final int MAX_GRASS_GROWN = 3;
     private int age;
     private static final Random rand = Randomizer.getRandom();
 
@@ -36,4 +38,40 @@ public class Grass extends HabitatFood
             setDead();
         }
     }
+    
+    public void act(List<HabitatFood> newGrass)
+    {
+        incrementAge();
+        //growNewGrass(newGrass);
+    }
+    
+    /** 
+     * generate number of grass to grow
+     */
+    private int grow() {
+        int babyGrass = 0;
+        if(rand.nextDouble() <= GROW_PROBABILITY) {
+            babyGrass = rand.nextInt(MAX_GRASS_GROWN) + 1;
+        }
+        return babyGrass;
+    }
+    
+    /**
+     * grow new grass in random free locations
+     */
+    private void growNewGrass(List<HabitatFood> newGrass) {
+        Field field = getField();
+        List<Location> free = field.getFreeLocations(getLocation());
+        int babyGrass = grow();
+        for (int i = 0; i < babyGrass && free.size() > 0; i++) {
+            Location loc = free.remove(0);
+            Grass baby= new Grass(true, field, loc);
+            newGrass.add(baby);
+        }
+        // if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                    // Location location = new Location(row, col);
+                    // Fox fox = new Fox(true, field, location);
+                    // animals.add(fox);
+    }
+    
 }

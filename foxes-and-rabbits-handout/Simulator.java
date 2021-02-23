@@ -33,6 +33,8 @@ public class Simulator
     private static final double BAT_CREATION_PROBABILITY = 0.03;
 
     private static final double FALCON_CREATION_PROBABILITY = 0.017;
+    
+    private static final double INSECT_CREATION_PROBABILITY = 0.07;  
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -75,11 +77,12 @@ public class Simulator
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
-        view.setColor(Snake.class, Color.RED);
+        //view.setColor(Snake.class, Color.RED);
         view.setColor(Flower.class, Color.MAGENTA);
-        view.setColor(Grass.class, Color.GREEN);
-        view.setColor(Bat.class, Color.BLACK);
-        view.setColor(Falcon.class, Color.YELLOW);
+        //view.setColor(Grass.class, Color.GREEN);
+        //view.setColor(Bat.class, Color.BLACK);
+        //view.setColor(Falcon.class, Color.YELLOW);
+        //view.setColor(Insect.class, Color.GRAY);
 
         // Setup a valid starting point.
         reset();
@@ -117,7 +120,8 @@ public class Simulator
         step++;
 
         // Provide space for newborn animals.
-        List<Animal> newAnimals = new ArrayList<>();        
+        List<Animal> newAnimals = new ArrayList<>();     
+        List<HabitatFood> newPlants = new ArrayList<>();
         // Let all rabbits act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
@@ -126,9 +130,17 @@ public class Simulator
                 it.remove();
             }
         }
+        for(Iterator<HabitatFood> it = habitatfood.iterator(); it.hasNext(); ) {
+            HabitatFood food = it.next();
+            food.act(newPlants);
+            if(! food.isAlive()) {
+                it.remove();
+            }
+        }
 
         // Add the newly born foxes and rabbits to the main lists.
         animals.addAll(newAnimals);
+        habitatfood.addAll(newPlants);
 
         view.showStatus(step, field);
     }
@@ -166,31 +178,36 @@ public class Simulator
                     Rabbit rabbit = new Rabbit(true, field, location);
                     animals.add(rabbit);
                 }
-                else if(rand.nextDouble() <= SNAKE_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Snake snake = new Snake(true, field, location);
-                    animals.add(snake);
-                }
+                // else if(rand.nextDouble() <= SNAKE_CREATION_PROBABILITY) {
+                    // Location location = new Location(row, col);
+                    // Snake snake = new Snake(true, field, location);
+                    // animals.add(snake);
+                // }
                 else if(rand.nextDouble() <= FLOWER_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Flower flower = new Flower(true, field, location);
                     habitatfood.add(flower);
                 }
+                // else if(rand.nextDouble() <= INSECT_CREATION_PROBABILITY) {
+                    // Location location = new Location(row, col);
+                    // Insect insect = new Insect(true, field, location);
+                    // habitatfood.add(insect);
+                // }
                 else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Grass grass = new Grass(true, field, location);
                     habitatfood.add(grass);
                 }
-                else if(rand.nextDouble() <= BAT_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Bat bat = new Bat(true, field, location);
-                    animals.add(bat);
-                }
-                else if(rand.nextDouble() <= FALCON_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Falcon falcon = new Falcon(true, field, location);
-                    animals.add(falcon);
-                }
+                // else if(rand.nextDouble() <= BAT_CREATION_PROBABILITY) {
+                    // Location location = new Location(row, col);
+                    // Bat bat = new Bat(true, field, location);
+                    // animals.add(bat);
+                // }
+                // else if(rand.nextDouble() <= FALCON_CREATION_PROBABILITY) {
+                    // Location location = new Location(row, col);
+                    // Falcon falcon = new Falcon(true, field, location);
+                    // animals.add(falcon);
+                // }
                 // else leave the location empty.
             }
         }
