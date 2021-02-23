@@ -1,5 +1,5 @@
 import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * A simple model of a rabbit.
@@ -110,6 +110,25 @@ public class Rabbit extends Animal
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;
+    }
+    
+    private Location findFood()
+    {
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object plant = field.getObjectAt(where);
+            if(plant instanceof Flower) {
+                Flower flower = (Flower) plant;
+                if(flower.isAlive()) { 
+                    flower.setDead();
+                    return where;
+                }
+            }
+        }
+        return null;
     }
 
     /**
