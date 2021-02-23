@@ -26,7 +26,9 @@ public class Simulator
     // The probability that a snake will be created in any given grid position.
     private static final double SNAKE_CREATION_PROBABILITY = 0.02;  
     
-    private static final double FLOWER_CREATION_PROBABILITY = 0.08;  
+    private static final double FLOWER_CREATION_PROBABILITY = 0.02;  
+    
+    private static final double GRASS_CREATION_PROBABILITY = 0.07;  
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -70,7 +72,8 @@ public class Simulator
         view.setColor(Rabbit.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
         view.setColor(Snake.class, Color.RED);
-        view.setColor(Flower.class, Color.GREEN);
+        view.setColor(Flower.class, Color.MAGENTA);
+        view.setColor(Grass.class, Color.GREEN);
         
         // Setup a valid starting point.
         reset();
@@ -166,6 +169,11 @@ public class Simulator
                     Location location = new Location(row, col);
                     Flower flower = new Flower(true, field, location);
                     plants.add(flower);
+                }
+                else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Grass grass = new Grass(true, field, location);
+                    plants.add(grass);
                 }
                 // else leave the location empty.
             }

@@ -9,7 +9,7 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Fox extends Animal
+public class Fox extends Animal implements Predator
 {
     // Characteristics shared by all foxes (class variables).
     
@@ -167,7 +167,7 @@ public class Fox extends Animal
     /**
      * A fox can breed if it has reached the breeding age.
      */
-    private boolean canBreed()
+    public boolean canBreed()
     {
         return age >= BREEDING_AGE;
     }

@@ -5,7 +5,7 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Snake extends Animal
+public class Snake extends Animal implements Predator
 {
 
     private static final int BREEDING_AGE = 15;
@@ -155,7 +155,7 @@ public class Snake extends Animal
     /**
      * A fox can breed if it has reached the breeding age.
      */
-    private boolean canBreed()
+    public boolean canBreed()
     {
         return age >= BREEDING_AGE;
     }

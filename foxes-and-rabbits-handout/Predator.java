@@ -1,4 +1,4 @@
-
+import java.util.*;
 /**
  * Write a description of interface Predator here.
  *
@@ -13,5 +13,15 @@ public interface Predator
      * @param  y a sample parameter for a method
      * @return   the result produced by sampleMethod
      */
-    int sampleMethod(int y);
+    //Location findFood();
+    
+    boolean canBreed();
+    
+    
+    
+    
+    
+    
+    
+    
 }
