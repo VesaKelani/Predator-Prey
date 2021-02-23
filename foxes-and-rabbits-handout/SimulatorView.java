@@ -24,7 +24,8 @@ public class SimulatorView extends JFrame
 
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
-    private JLabel stepLabel, population, infoLabel;
+    private final String CLOCK_PREFIX = "Time: ";
+    private JLabel stepLabel, population, infoLabel, clockLabel;
     private FieldView fieldView;
     
     // A map for storing colors for participants in the simulation
@@ -47,6 +48,8 @@ public class SimulatorView extends JFrame
         infoLabel = new JLabel("  ", JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         
+        clockLabel = new JLabel(CLOCK_PREFIX, JLabel.CENTER);
+        
         setLocation(100, 50);
         
         fieldView = new FieldView(height, width);
@@ -56,6 +59,8 @@ public class SimulatorView extends JFrame
         JPanel infoPane = new JPanel(new BorderLayout());
             infoPane.add(stepLabel, BorderLayout.WEST);
             infoPane.add(infoLabel, BorderLayout.CENTER);
+            infoPane.add(clockLabel, BorderLayout.EAST);
+        
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);

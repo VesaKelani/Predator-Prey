@@ -44,6 +44,8 @@ public class Simulator
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
+    
+    private ClockDisplay clock;
 
     /**
      * Construct a simulation field with default size.
@@ -115,6 +117,7 @@ public class Simulator
     public void simulateOneStep()
     {
         step++;
+        clock.timeTick();
 
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();        
@@ -132,7 +135,12 @@ public class Simulator
 
         view.showStatus(step, field);
     }
-
+    
+    public int getSteps() 
+    {
+        return step;
+    }
+    
     /**
      * Reset the simulation to a starting position.
      */
