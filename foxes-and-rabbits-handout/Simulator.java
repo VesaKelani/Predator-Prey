@@ -16,9 +16,9 @@ public class Simulator
 {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 120;
+    private static final int DEFAULT_WIDTH = 100;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 80;
+    private static final int DEFAULT_DEPTH = 100;
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
@@ -30,14 +30,14 @@ public class Simulator
 
     private static final double GRASS_CREATION_PROBABILITY = 0.07;  
 
-    private static final double BAT_CREATION_PROBABILITY = 0.2;
+    private static final double BAT_CREATION_PROBABILITY = 0.03;
 
-    private static final double FALCON_CREATION_PROBABILITY = 0.02;
+    private static final double FALCON_CREATION_PROBABILITY = 0.017;
 
     // List of animals in the field.
     private List<Animal> animals;
-    //list of plants
-    private List<Plant> plants;
+    //list of habitatfood
+    private List<HabitatFood> habitatfood;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -68,7 +68,7 @@ public class Simulator
         }
 
         animals = new ArrayList<>();
-        plants = new ArrayList<>();
+        habitatfood = new ArrayList<>();
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
@@ -140,7 +140,7 @@ public class Simulator
     {
         step = 0;
         animals.clear();
-        plants.clear();
+        habitatfood.clear();
         populate();
 
         // Show the starting state in the view.
@@ -174,12 +174,12 @@ public class Simulator
                 else if(rand.nextDouble() <= FLOWER_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Flower flower = new Flower(true, field, location);
-                    plants.add(flower);
+                    habitatfood.add(flower);
                 }
                 else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Grass grass = new Grass(true, field, location);
-                    plants.add(grass);
+                    habitatfood.add(grass);
                 }
                 else if(rand.nextDouble() <= BAT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);

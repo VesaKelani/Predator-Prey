@@ -18,7 +18,7 @@ public class Falcon extends Animal implements Predator
     // The age to which a falcon can live.
     private static final int MAX_AGE = 19;
     // The likelihood of a falcon breeding.
-    private static final double BREEDING_PROBABILITY = 0.21;
+    private static final double BREEDING_PROBABILITY = 0.04;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
     // The food value of a single rabbit. In effect, this is the

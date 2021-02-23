@@ -18,7 +18,7 @@ public class Bat extends Animal implements Predator
     // The age to which a bat can live.
     private static final int MAX_AGE = 20;
     // The likelihood of a bat breeding.
-    private static final double BREEDING_PROBABILITY = 0.35;
+    private static final double BREEDING_PROBABILITY = 0.05;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 2;
     
