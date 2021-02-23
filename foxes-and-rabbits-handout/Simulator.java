@@ -33,6 +33,8 @@ public class Simulator
     private static final double BAT_CREATION_PROBABILITY = 0.03;
 
     private static final double FALCON_CREATION_PROBABILITY = 0.017;
+    
+    private static final double INSECT_CREATION_PROBABILITY = 0.07;  
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -80,6 +82,7 @@ public class Simulator
         view.setColor(Grass.class, Color.GREEN);
         view.setColor(Bat.class, Color.BLACK);
         view.setColor(Falcon.class, Color.YELLOW);
+        view.setColor(Insect.class, Color.GRAY);
 
         // Setup a valid starting point.
         reset();
@@ -175,6 +178,11 @@ public class Simulator
                     Location location = new Location(row, col);
                     Flower flower = new Flower(true, field, location);
                     habitatfood.add(flower);
+                }
+                else if(rand.nextDouble() <= INSECT_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Insect insect = new Insect(true, field, location);
+                    habitatfood.add(insect);
                 }
                 else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
