@@ -25,10 +25,14 @@ public class Simulator
     private static final double RABBIT_CREATION_PROBABILITY = 0.05;  
     // The probability that a snake will be created in any given grid position.
     private static final double SNAKE_CREATION_PROBABILITY = 0.02;  
-    
+
     private static final double FLOWER_CREATION_PROBABILITY = 0.02;  
-    
+
     private static final double GRASS_CREATION_PROBABILITY = 0.07;  
+
+    private static final double BAT_CREATION_PROBABILITY = 0.2;
+
+    private static final double FALCON_CREATION_PROBABILITY = 0.02;
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -40,7 +44,7 @@ public class Simulator
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
-    
+
     /**
      * Construct a simulation field with default size.
      */
@@ -48,7 +52,7 @@ public class Simulator
     {
         this(DEFAULT_DEPTH, DEFAULT_WIDTH);
     }
-    
+
     /**
      * Create a simulation field with the given size.
      * @param depth Depth of the field. Must be greater than zero.
@@ -62,7 +66,7 @@ public class Simulator
             depth = DEFAULT_DEPTH;
             width = DEFAULT_WIDTH;
         }
-        
+
         animals = new ArrayList<>();
         plants = new ArrayList<>();
         field = new Field(depth, width);
@@ -74,11 +78,13 @@ public class Simulator
         view.setColor(Snake.class, Color.RED);
         view.setColor(Flower.class, Color.MAGENTA);
         view.setColor(Grass.class, Color.GREEN);
-        
+        view.setColor(Bat.class, Color.BLACK);
+        view.setColor(Falcon.class, Color.YELLOW);
+
         // Setup a valid starting point.
         reset();
     }
-    
+
     /**
      * Run the simulation from its current state for a reasonably long period,
      * (4000 steps).
@@ -87,7 +93,7 @@ public class Simulator
     {
         simulate(4000);
     }
-    
+
     /**
      * Run the simulation from its current state for the given number of steps.
      * Stop before the given number of steps if it ceases to be viable.
@@ -100,7 +106,7 @@ public class Simulator
             // delay(60);   // uncomment this to run more slowly
         }
     }
-    
+
     /**
      * Run the simulation from its current state for a single step.
      * Iterate over the whole field updating the state of each
@@ -120,13 +126,13 @@ public class Simulator
                 it.remove();
             }
         }
-               
+
         // Add the newly born foxes and rabbits to the main lists.
         animals.addAll(newAnimals);
 
         view.showStatus(step, field);
     }
-        
+
     /**
      * Reset the simulation to a starting position.
      */
@@ -136,11 +142,11 @@ public class Simulator
         animals.clear();
         plants.clear();
         populate();
-        
+
         // Show the starting state in the view.
         view.showStatus(step, field);
     }
-    
+
     /**
      * Randomly populate the field with foxes and rabbits AND SNAKE TOO.
      */
@@ -175,11 +181,21 @@ public class Simulator
                     Grass grass = new Grass(true, field, location);
                     plants.add(grass);
                 }
+                else if(rand.nextDouble() <= BAT_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Bat bat = new Bat(true, field, location);
+                    animals.add(bat);
+                }
+                else if(rand.nextDouble() <= FALCON_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Falcon falcon = new Falcon(true, field, location);
+                    animals.add(falcon);
+                }
                 // else leave the location empty.
             }
         }
     }
-    
+
     /**
      * Pause for a given time.
      * @param millisec  The time to pause for, in milliseconds
