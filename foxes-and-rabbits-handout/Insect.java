@@ -38,7 +38,7 @@ public class Insect extends HabitatFood
         }
     }
     
-    public void act(List<HabitatFood> newGrass)
+    public void act(List<HabitatFood> newInsects)
     {
         incrementAge();
     }
