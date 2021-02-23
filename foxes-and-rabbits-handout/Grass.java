@@ -8,10 +8,11 @@ import java.util.*;
 public class Grass extends HabitatFood
 {
     private static final int MAX_AGE = 200;
-    private static final double GROW_PROBABILITY = 0.12;
-    private static final int MAX_GRASS_GROWN = 3;
+    private static final double GROW_PROBABILITY = 0.04;
+    private static final int MAX_GRASS_GROWN = 1;
     private int age;
     private static final Random rand = Randomizer.getRandom();
+    private FieldStats stats;
 
     /**
      * Constructor for objects of class Grass
@@ -41,8 +42,11 @@ public class Grass extends HabitatFood
     
     public void act(List<HabitatFood> newGrass)
     {
-        incrementAge();
-        //growNewGrass(newGrass);
+     incrementAge(); 
+     //String details = stats.generateCounts(field);
+        if(isAlive() ) {
+            growNewGrass(newGrass);
+        }   
     }
     
     /** 
@@ -61,11 +65,22 @@ public class Grass extends HabitatFood
      */
     private void growNewGrass(List<HabitatFood> newGrass) {
         Field field = getField();
-        List<Location> free = field.getFreeLocations(getLocation());
+        List<Location> free = new LinkedList<>();
         int babyGrass = grow();
+        
+        for(int i = 0; i < field.getDepth(); i++) {
+            for(int j = 0; j < field.getWidth(); j++) {
+                if(field.getObjectAt(i, j) == null) {
+                    free.add(new Location(i, j));
+                }
+            }
+        }
+        Collections.shuffle(free);
+        
+        
         for (int i = 0; i < babyGrass && free.size() > 0; i++) {
             Location loc = free.remove(0);
-            Grass baby= new Grass(true, field, loc);
+            Grass baby= new Grass(false, field, loc);
             newGrass.add(baby);
         }
         // if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {

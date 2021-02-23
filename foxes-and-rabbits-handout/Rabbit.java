@@ -27,6 +27,7 @@ public class Rabbit extends Animal
     
     // The rabbit's age.
     private int age;
+    private String sex;
 
     /**
      * Create a new rabbit. A rabbit may be created with age

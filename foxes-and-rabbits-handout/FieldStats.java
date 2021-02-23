@@ -119,10 +119,13 @@ public class FieldStats
             for(int col = 0; col < field.getWidth(); col++) {
                 Object animal = field.getObjectAt(row, col);
                 if(animal != null) {
-                    incrementCount(animal.getClass());
+                     incrementCount(animal.getClass());
+                    
                 }
             }
         }
         countsValid = true;
     }
+    
+    
 }
