@@ -120,17 +120,25 @@ public class Falcon extends Animal implements Predator
         while(it.hasNext()) {
             Location where = it.next();
             Object animal = field.getObjectAt(where);
-            if(animal instanceof Rabbit || animal instanceof Snake) {
+            if(animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
-                Snake snake = (Snake) animal;
+                //Snake snake = (Snake) animal;
                 if(rabbit.isAlive()) { 
                     rabbit.setDead();
-                    foodLevel = RABBIT_FOOD_VALUE + SNAKE_FOOD_VALUE;
+                    foodLevel = RABBIT_FOOD_VALUE;
                     return where;
                 }
-                else if(snake.isAlive()) {
+                // else if(snake.isAlive()) {
+                    // snake.setDead();
+                    // foodLevel = SNAKE_FOOD_VALUE;
+                    // return where;
+                // }
+            }
+            else if (animal instanceof Snake) {
+                Snake snake = (Snake) animal;
+                if(snake.isAlive()) { 
                     snake.setDead();
-                    foodLevel = RABBIT_FOOD_VALUE + SNAKE_FOOD_VALUE;
+                    foodLevel = SNAKE_FOOD_VALUE;
                     return where;
                 }
             }
