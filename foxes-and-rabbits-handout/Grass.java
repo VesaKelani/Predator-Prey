@@ -5,7 +5,7 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Grass extends Plant
+public class Grass extends HabitatFood
 {
     private static final int MAX_AGE = 50;
     private int age;

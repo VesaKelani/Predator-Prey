@@ -5,7 +5,7 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Flower extends Plant
+public class Flower extends HabitatFood
 {
     // variables shared by all flowers
     private static final int MAX_AGE = 50;

@@ -1,11 +1,11 @@
 
 /**
- * Abstract class Plant - write a description of the class here
+ * Abstract class HabitatFood - write a description of the class here
  *
  * @author (your name here)
  * @version (version number or date here)
  */
-public abstract class Plant
+public abstract class HabitatFood
 {
     private boolean alive;
     // The animal's field.
@@ -19,7 +19,7 @@ public abstract class Plant
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public Plant(Field field, Location location)
+    public HabitatFood(Field field, Location location)
     {
         alive = true;
         this.field = field;
