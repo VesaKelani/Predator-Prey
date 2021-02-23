@@ -42,7 +42,7 @@ public class Grass extends HabitatFood
     public void act(List<HabitatFood> newGrass)
     {
         incrementAge();
-        growNewGrass(newGrass);
+        //growNewGrass(newGrass);
     }
     
     /** 
