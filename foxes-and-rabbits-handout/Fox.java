@@ -32,6 +32,7 @@ public class Fox extends Animal implements Predator
     private int age;
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
+    private String sex;
 
     /**
      * Create a fox. A fox can be created as a new born (age zero
@@ -52,6 +53,24 @@ public class Fox extends Animal implements Predator
             age = 0;
             foodLevel = RABBIT_FOOD_VALUE;
         }
+        sex = generateSex();
+    
+    }
+    
+    public String generateSex() {
+        if(Math.random() > 0.5) {
+            sex  = "MALE";}
+        else {sex = "FEMALE";}
+        return sex;
+    }
+    
+    /**
+     * Increase the age.
+     * Returns the animals Sex
+     */
+    public String getSex()
+    {
+        return sex;
     }
     
     /**
@@ -171,4 +190,30 @@ public class Fox extends Animal implements Predator
     {
         return age >= BREEDING_AGE;
     }
+    
+    /**
+     * returns if an animal has found a mate to breed with, y'know, since we have sex now
+     */
+    private boolean foundMate() {
+
+        String sex = getSex();
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object adjacentOjbect = field.getObjectAt(where);
+            if(adjacentOjbect instanceof Fox) {
+                Fox mate = (Fox) adjacentOjbect;
+                if(mate.getSex().equals(sex)) { 
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
 }

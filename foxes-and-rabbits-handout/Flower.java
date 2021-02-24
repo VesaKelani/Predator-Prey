@@ -10,11 +10,12 @@ public class Flower extends HabitatFood
     // variables shared by all flowers
     private static final int MAX_AGE = 500;
     private static final Random rand = Randomizer.getRandom();
-    
+    private static final double GROW_PROBABILITY = 0.04;
+    private static final int MAX_GRASS_GROWN = 1;
     //each specific flower age
     private int age;
+    private int totalFlowers = 0;
     
-
     /**
      * Constructor for objects of class Flower
      */
@@ -41,20 +42,48 @@ public class Flower extends HabitatFood
         }
     }
     
-    public void act(List<HabitatFood> newFlowers)
-    {
-        incrementAge();
-        // if(!isAlive()) {
-                      
-            // // Try to move into a free location.
-            // Location newLocation = getField().freeAdjacentLocation(getLocation());
-            // if(newLocation != null) {
-                // setLocation(newLocation);
-            // }
-            // else {
-                // // Overcrowding.
-                // setDead();
-            // }
-        // }
+    public void act(List<HabitatFood> newFlowers) {
+        incrementAge(); 
+        // if(isAlive() && totalFlowers < 50) {
+            // growNewFlowers(newFlowers);
+        // } 
+    }
+    
+    /** 
+     * generate number of grass to grow
+     */
+    private int grow() {
+        int babyFlower = 0;
+        
+        if(rand.nextDouble() <= GROW_PROBABILITY) {
+            babyFlower = rand.nextInt(MAX_GRASS_GROWN) + 1;
+            totalFlowers += babyFlower;
+        }
+        return babyFlower;
+    }
+    
+    /**
+     * grow new grass in random free locations
+     */
+    private void growNewFlowers(List<HabitatFood> newFlowers) {
+        Field field = getField();
+        List<Location> free = new LinkedList<>();
+        int babyFlower = grow();
+        
+        for(int i = 0; i < field.getDepth(); i++) {
+            for(int j = 0; j < field.getWidth(); j++) {
+                if(field.getObjectAt(i, j) == null) {
+                    free.add(new Location(i, j));
+                }
+            }
+        }
+        Collections.shuffle(free);
+
+        for (int i = 0; i < babyFlower && free.size() > 0; i++) {
+            Location loc = free.remove(0);
+            Flower baby= new Flower(false, field, loc);
+            newFlowers.add(baby);
+        }
+
     }
 }

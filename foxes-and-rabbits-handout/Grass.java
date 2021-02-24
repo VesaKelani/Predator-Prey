@@ -7,12 +7,12 @@ import java.util.*;
  */
 public class Grass extends HabitatFood
 {
-    private static final int MAX_AGE = 200;
+    private static final int MAX_AGE = 20;
     private static final double GROW_PROBABILITY = 0.04;
     private static final int MAX_GRASS_GROWN = 1;
     private int age;
     private static final Random rand = Randomizer.getRandom();
-    private FieldStats stats;
+    private int totalGrass = 0;
 
     /**
      * Constructor for objects of class Grass
@@ -42,11 +42,11 @@ public class Grass extends HabitatFood
     
     public void act(List<HabitatFood> newGrass)
     {
-     incrementAge(); 
+     //incrementAge(); 
      //String details = stats.generateCounts(field);
-        if(isAlive() ) {
-            growNewGrass(newGrass);
-        }   
+        // if(isAlive() && totalGrass < 50) {
+            // growNewGrass(newGrass);
+        // }   
     }
     
     /** 
@@ -54,8 +54,10 @@ public class Grass extends HabitatFood
      */
     private int grow() {
         int babyGrass = 0;
+        
         if(rand.nextDouble() <= GROW_PROBABILITY) {
             babyGrass = rand.nextInt(MAX_GRASS_GROWN) + 1;
+            totalGrass += babyGrass;
         }
         return babyGrass;
     }
@@ -76,17 +78,13 @@ public class Grass extends HabitatFood
             }
         }
         Collections.shuffle(free);
-        
-        
+
         for (int i = 0; i < babyGrass && free.size() > 0; i++) {
             Location loc = free.remove(0);
             Grass baby= new Grass(false, field, loc);
             newGrass.add(baby);
         }
-        // if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    // Location location = new Location(row, col);
-                    // Fox fox = new Fox(true, field, location);
-                    // animals.add(fox);
+
     }
     
 }

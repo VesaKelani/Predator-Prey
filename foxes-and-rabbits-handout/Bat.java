@@ -28,6 +28,7 @@ public class Bat extends Animal implements Predator
     // Individual characteristics (instance fields).
     // The bat's age.
     private int age;
+    private String sex;
 
     /**
      * Create a bat. A bat can be created as a new born (age zero
@@ -46,6 +47,23 @@ public class Bat extends Animal implements Predator
         else {
             age = 0;
         }
+        sex = generateSex();
+    }
+    
+    public String generateSex() {
+        if(Math.random() > 0.5) {
+            sex  = "MALE";}
+        else {sex = "FEMALE";}
+        return sex;
+    }
+    
+    /**
+     * Increase the age.
+     * Returns the animals Sex
+     */
+    public String getSex()
+    {
+        return sex;
     }
     
     /**
@@ -122,5 +140,30 @@ public class Bat extends Animal implements Predator
     public boolean canBreed()
     {
         return age >= BREEDING_AGE;
+    }
+    
+    /**
+     * returns if an animal has found a mate to breed with, y'know, since we have sex now
+     */
+    private boolean foundMate() {
+
+        String sex = getSex();
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object adjacentOjbect = field.getObjectAt(where);
+            if(adjacentOjbect instanceof Bat) {
+                Bat mate = (Bat) adjacentOjbect;
+                if(mate.getSex().equals(sex)) { 
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

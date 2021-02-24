@@ -15,6 +15,9 @@ public abstract class Animal
     // The animal's position in the field.
     private Location location;
     
+    //animal's sex
+    
+    
     /**
      * Create a new animal at location in field.
      * 
@@ -43,7 +46,8 @@ public abstract class Animal
     {
         return alive;
     }
-
+    
+   
     /**
      * Indicate that the animal is no longer alive.
      * It is removed from the field.

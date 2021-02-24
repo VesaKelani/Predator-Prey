@@ -22,9 +22,9 @@ public class Rabbit extends Animal
     private static final int MAX_LITTER_SIZE = 4;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-    
+
     // Individual characteristics (instance fields).
-    
+
     // The rabbit's age.
     private int age;
     private String sex;
@@ -44,8 +44,28 @@ public class Rabbit extends Animal
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
         }
+        sex = generateSex();
     }
     
+    /** 
+     * random sex
+     */
+    public String generateSex() {
+        if(Math.random() > 0.5) {
+            sex  = "MALE";}
+        else {sex = "FEMALE";}
+        return sex;
+    }
+    
+    /**
+     * Increase the age.
+     * Returns the animals Sex
+     */
+    public String getSex()
+    {
+        return sex;
+    }
+
     /**
      * This is what the rabbit does most of the time - it runs 
      * around. Sometimes it will breed or die of old age.
@@ -68,6 +88,7 @@ public class Rabbit extends Animal
         }
     }
 
+
     /**
      * Increase the age.
      * This could result in the rabbit's death.
@@ -79,7 +100,7 @@ public class Rabbit extends Animal
             setDead();
         }
     }
-    
+
     /**
      * Check whether or not this rabbit is to give birth at this step.
      * New births will be made into free adjacent locations.
@@ -98,7 +119,7 @@ public class Rabbit extends Animal
             newRabbits.add(young);
         }
     }
-        
+
     /**
      * Generate a number representing the number of births,
      * if it can breed.
@@ -107,12 +128,12 @@ public class Rabbit extends Animal
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if(canBreed() &&  rand.nextDouble() <= BREEDING_PROBABILITY) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;
     }
-    
+
     private Location findFood()
     {
         Field field = getField();
@@ -139,5 +160,30 @@ public class Rabbit extends Animal
     private boolean canBreed()
     {
         return age >= BREEDING_AGE;
+    }
+
+    /**
+     * returns if an animal has found a mate to breed with, y'know, since we have sex now
+     */
+    private boolean foundMate() {
+
+        String sex = getSex();
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object adjacentOjbect = field.getObjectAt(where);
+            if(adjacentOjbect instanceof Rabbit) {
+                Rabbit mate = (Rabbit) adjacentOjbect;
+                if(mate.getSex().equals(sex)) { 
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
