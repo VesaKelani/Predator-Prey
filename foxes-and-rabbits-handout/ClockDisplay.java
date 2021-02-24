@@ -16,6 +16,7 @@ public class ClockDisplay
     private NumberDisplay hours;
     private NumberDisplay minutes;
     private String displayString;    // simulates the actual display
+    private boolean isDay;
     
     /**
      * Constructor for ClockDisplay objects. This constructor 
@@ -46,9 +47,9 @@ public class ClockDisplay
      */
     public void timeTick()
     {
-        minutes.increment();
+        minutes.minuteIncrement();
         if(minutes.getValue() == 0) {  // it just rolled over!
-            hours.increment();
+            hours.hourIncrement();
         }
         updateDisplay();
     }
@@ -63,14 +64,6 @@ public class ClockDisplay
         minutes.setValue(minute);
         updateDisplay();
     }
-
-    /**
-     * Return the current time of this display in the format HH:MM.
-     */
-    public String getTime()
-    {
-        return displayString;
-    }
     
     /**
      * Update the internal string that represents the display.
@@ -79,5 +72,22 @@ public class ClockDisplay
     {
         displayString = hours.getDisplayValue() + ":" + 
                         minutes.getDisplayValue();
+    }
+    
+    public String getDisplay()
+    
+    {
+        return displayString;
+    }
+    
+    public boolean isDay()
+    {
+        if (hours.getValue() > 7 && hours.getValue() < 18) {
+            isDay = true;
+        }
+        else {
+            isDay = false;
+        }
+        return isDay;
     }
 }

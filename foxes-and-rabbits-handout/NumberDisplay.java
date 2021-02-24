@@ -62,8 +62,13 @@ public class NumberDisplay
      * Increment the display value by one, rolling over to zero if the
      * limit is reached.
      */
-    public void increment()
+    public void minuteIncrement()
     {
-        value = (value + 1) % limit;
+        value = (value + 0) % limit;
+    }
+    
+    public void hourIncrement()
+    {
+        value = (value + 6) % limit;
     }
 }

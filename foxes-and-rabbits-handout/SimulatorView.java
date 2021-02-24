@@ -32,7 +32,9 @@ public class SimulatorView extends JFrame
     private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
-
+    
+    private Time clock;
+    
     /**
      * Create a view of the given width and height.
      * @param height The simulation's height.
@@ -42,6 +44,8 @@ public class SimulatorView extends JFrame
     {
         stats = new FieldStats();
         colors = new LinkedHashMap<>();
+        
+        clock = new Time();
 
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
@@ -132,7 +136,14 @@ public class SimulatorView extends JFrame
         stats.countFinished();
 
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
+        
+        clockLabel.setText(CLOCK_PREFIX + clock.getDisplay() );
         fieldView.repaint();
+    }
+    
+    public void timeTick()
+    {
+        clock.timeTick();
     }
 
     /**

@@ -57,18 +57,23 @@ public class Bat extends Animal implements Predator
      */
     public void act(List<Animal> newBats)
     {
-        incrementAge();
-        if(isAlive()) {
-            giveBirth(newBats);            
-            // Move towards a source of food if found.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
+        if (!isDay()) {
+            incrementAge();
+            if(isAlive()) {
+                giveBirth(newBats);            
+                // Move towards a source of food if found.
+                Location newLocation = getField().freeAdjacentLocation(getLocation());
+                if(newLocation != null) {
+                    setLocation(newLocation);
+                }
+                else {
+                    // Overcrowding.
+                    setDead();
+                }
             }
-            else {
-                // Overcrowding.
-                setDead();
-            }
+        }
+        else {
+            //sleep
         }
     }
 
