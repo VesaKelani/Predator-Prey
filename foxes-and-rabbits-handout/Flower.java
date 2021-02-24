@@ -44,9 +44,9 @@ public class Flower extends HabitatFood
     
     public void act(List<HabitatFood> newFlowers) {
         incrementAge(); 
-        // if(isAlive() && totalFlowers < 50) {
-            // growNewFlowers(newFlowers);
-        // } 
+        if(isAlive() && totalFlowers < 50) {
+            growNewFlowers(newFlowers);
+        } 
     }
     
     /** 
@@ -69,11 +69,12 @@ public class Flower extends HabitatFood
         Field field = getField();
         List<Location> free = new LinkedList<>();
         int babyFlower = grow();
-        
+        int count = 0;
         for(int i = 0; i < field.getDepth(); i++) {
             for(int j = 0; j < field.getWidth(); j++) {
                 if(field.getObjectAt(i, j) == null) {
                     free.add(new Location(i, j));
+                    count += 1;
                 }
             }
         }
