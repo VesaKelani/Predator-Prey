@@ -8,6 +8,7 @@
 public class Time
 {
     private ClockDisplay clock;
+    private boolean isDay;
     
     /**
      * Constructor for objects of class Time
@@ -27,10 +28,11 @@ public class Time
     
     {
         clock.timeTick();
+        isDay = clock.isDay();
     }
     
-    public boolean isDay()
+    public boolean getIsDay()
     {
-        return clock.isDay();
+        return isDay;
     }
 }

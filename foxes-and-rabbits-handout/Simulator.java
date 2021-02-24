@@ -131,7 +131,6 @@ public class Simulator
 
         // Add the newly born foxes and rabbits to the main lists.
         animals.addAll(newAnimals);
-        //delay(400);
         view.showStatus(step, field);
     }
     

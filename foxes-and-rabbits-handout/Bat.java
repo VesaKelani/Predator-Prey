@@ -73,9 +73,9 @@ public class Bat extends Animal implements Predator
             }
         }
         else {
-            //sleep
-        }
+            //do nothing
     }
+}
 
     /**
      * Increase the age. This could result in the bat's death.

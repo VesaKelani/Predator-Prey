@@ -28,6 +28,7 @@ public abstract class Animal
         alive = true;
         this.field = field;
         setLocation(location);
+        time = new Time();
     }
     
     /**
@@ -93,6 +94,6 @@ public abstract class Animal
     
     protected boolean isDay()
     {
-        return time.isDay();
+      return time.getIsDay();
     }
 }

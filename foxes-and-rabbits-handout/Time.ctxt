@@ -9,5 +9,5 @@ comment2.target=java.lang.String\ getDisplay()
 comment3.params=
 comment3.target=void\ timeTick()
 comment4.params=
-comment4.target=boolean\ isDay()
+comment4.target=boolean\ getIsDay()
 numComments=5
