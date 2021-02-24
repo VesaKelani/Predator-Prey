@@ -33,7 +33,6 @@ public class SimulatorView extends JFrame
     // A statistics object computing and storing simulation information
     private FieldStats stats;
     
-    private Time clock;
     
     /**
      * Create a view of the given width and height.
@@ -45,7 +44,6 @@ public class SimulatorView extends JFrame
         stats = new FieldStats();
         colors = new LinkedHashMap<>();
         
-        clock = new Time();
 
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
@@ -91,7 +89,9 @@ public class SimulatorView extends JFrame
     }
 
     /**
-     * @return The color to be used for a given class of animal.
+     * Return the color used for the animal class.
+     * @param The animal class.
+     * @return The color to be used for the class.
      */
     private Color getColor(Class animalClass)
     {
@@ -137,17 +137,21 @@ public class SimulatorView extends JFrame
 
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
         
-        clockLabel.setText(CLOCK_PREFIX + clock.getDisplay() );
+        clockLabel.setText(CLOCK_PREFIX + Time.getDisplay() );
         fieldView.repaint();
     }
     
+    /**
+     * Increase the time (tick the clock).
+     */
     public void timeTick()
     {
-        clock.timeTick();
+        Time.timeTick();
     }
 
     /**
      * Determine whether the simulation should continue to run.
+     * @param The field in question.
      * @return true If there is more than one species alive.
      */
     public boolean isViable(Field field)

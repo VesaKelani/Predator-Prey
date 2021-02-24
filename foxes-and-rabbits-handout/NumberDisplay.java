@@ -16,7 +16,7 @@ public class NumberDisplay
 
     /**
      * Constructor for objects of class NumberDisplay.
-     * Set the limit at which the display rolls over.
+     * @param The limit at which the display rolls over.
      */
     public NumberDisplay(int rollOverLimit)
     {
@@ -26,6 +26,7 @@ public class NumberDisplay
 
     /**
      * Return the current value.
+     * @return The current value.
      */
     public int getValue()
     {
@@ -36,6 +37,7 @@ public class NumberDisplay
      * Return the display value (that is, the current value as a two-digit
      * String. If the value is less than ten, it will be padded with a leading
      * zero).
+     * @return The display value.
      */
     public String getDisplayValue()
     {
@@ -59,7 +61,7 @@ public class NumberDisplay
     }
 
     /**
-     * Increment the display value by one, rolling over to zero if the
+     * Increment the minutes display value by 0, rolling over to zero if the
      * limit is reached.
      */
     public void minuteIncrement()
@@ -67,6 +69,10 @@ public class NumberDisplay
         value = (value + 0) % limit;
     }
     
+    /**
+     * Increment the hour display value by 6, rolling over to zero if the
+     * limit is reached.
+     */
     public void hourIncrement()
     {
         value = (value + 6) % limit;

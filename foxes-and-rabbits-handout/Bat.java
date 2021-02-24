@@ -12,19 +12,19 @@ import java.util.Random;
 public class Bat extends Animal implements Predator
 {
     // Characteristics shared by all bats (class variables).
-    
+
     // The age at which a bat can start to breed.
     private static final int BREEDING_AGE = 2;
     // The age to which a bat can live.
     private static final int MAX_AGE = 20;
     // The likelihood of a bat breeding.
-    private static final double BREEDING_PROBABILITY = 0.05;
+    private static final double BREEDING_PROBABILITY = 0.04;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 2;
-    
+
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-    
+
     // Individual characteristics (instance fields).
     // The bat's age.
     private int age;
@@ -47,11 +47,13 @@ public class Bat extends Animal implements Predator
             age = 0;
         }
     }
-    
+
     /**
-     * This is what the bat does most of the time: it vibes
-     * In the process, it might breed, die of hunger,
-     * or die of old age.
+     * The bat's behaviour, which changes whether 
+     * it is day time or not. During the day it sleeps 
+     * and during the night it might breed, die of hunger,
+     * or die of old age. 
+     * 
      * @param field The field currently occupied.
      * @param newBats A list to return newly born bats.
      */
@@ -73,9 +75,9 @@ public class Bat extends Animal implements Predator
             }
         }
         else {
-            //do nothing
+            //sleep
+        }
     }
-}
 
     /**
      * Increase the age. This could result in the bat's death.
@@ -87,7 +89,7 @@ public class Bat extends Animal implements Predator
             setDead();
         }
     }
-    
+
     /**
      * Check whether or not this bat is to give birth at this step.
      * New births will be made into free adjacent locations.
@@ -106,7 +108,7 @@ public class Bat extends Animal implements Predator
             newBats.add(young);
         }
     }
-        
+
     /**
      * Generate a number representing the number of births,
      * if it can breed.
@@ -123,6 +125,7 @@ public class Bat extends Animal implements Predator
 
     /**
      * A bat can breed if it has reached the breeding age.
+     * @return If it can breen or not.
      */
     public boolean canBreed()
     {

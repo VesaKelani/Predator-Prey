@@ -104,7 +104,7 @@ public class Simulator
     {
         for(int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
-            // delay(60);   // uncomment this to run more slowly
+            delay(60);   // uncomment this to run more slowly
         }
     }
 
@@ -134,6 +134,10 @@ public class Simulator
         view.showStatus(step, field);
     }
     
+    /**
+     * Return the total steps so far.
+     * @return The total steps.
+     */
     public int getSteps() 
     {
         return step;

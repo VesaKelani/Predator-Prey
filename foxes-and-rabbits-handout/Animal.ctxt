@@ -24,4 +24,5 @@ comment7.target=Field\ getField()
 comment7.text=\n\ Return\ the\ animal's\ field.\n\ @return\ The\ animal's\ field.\n
 comment8.params=
 comment8.target=boolean\ isDay()
+comment8.text=\n\ Return\ whether\ it\ is\ daytime\ or\ not.\n\ @return\ Whether\ it\ is\ daytime\ or\ not.\n
 numComments=9

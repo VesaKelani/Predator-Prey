@@ -22,9 +22,9 @@ public class Rabbit extends Animal
     private static final int MAX_LITTER_SIZE = 4;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-    
+
     // Individual characteristics (instance fields).
-    
+
     // The rabbit's age.
     private int age;
 
@@ -44,26 +44,33 @@ public class Rabbit extends Animal
             age = rand.nextInt(MAX_AGE);
         }
     }
-    
+
     /**
-     * This is what the rabbit does most of the time - it runs 
-     * around. Sometimes it will breed or die of old age.
+     * The rabbit's behaviour, which changes whether 
+     * it is day time or not. During the night it sleeps 
+     * and during the day it might breed,
+     * or die of old age. 
      * @param newRabbits A list to return newly born rabbits.
      */
     public void act(List<Animal> newRabbits)
     {
-        incrementAge();
-        if(isAlive()) {
-            giveBirth(newRabbits);            
-            // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
+        if (isDay()) {
+            incrementAge();
+            if(isAlive()) {
+                giveBirth(newRabbits);            
+                // Try to move into a free location.
+                Location newLocation = getField().freeAdjacentLocation(getLocation());
+                if(newLocation != null) {
+                    setLocation(newLocation);
+                }
+                else {
+                    // Overcrowding.
+                    setDead();
+                }
             }
-            else {
-                // Overcrowding.
-                setDead();
-            }
+        }
+        else {
+            //sleep
         }
     }
 
@@ -78,7 +85,7 @@ public class Rabbit extends Animal
             setDead();
         }
     }
-    
+
     /**
      * Check whether or not this rabbit is to give birth at this step.
      * New births will be made into free adjacent locations.
@@ -97,7 +104,7 @@ public class Rabbit extends Animal
             newRabbits.add(young);
         }
     }
-        
+
     /**
      * Generate a number representing the number of births,
      * if it can breed.
@@ -111,7 +118,7 @@ public class Rabbit extends Animal
         }
         return births;
     }
-    
+
     private Location findFood()
     {
         Field field = getField();

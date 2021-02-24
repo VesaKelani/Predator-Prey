@@ -15,8 +15,6 @@ public abstract class Animal
     // The animal's position in the field.
     private Location location;
     
-    private Time time;
-    
     /**
      * Create a new animal at location in field.
      * 
@@ -28,7 +26,6 @@ public abstract class Animal
         alive = true;
         this.field = field;
         setLocation(location);
-        time = new Time();
     }
     
     /**
@@ -92,8 +89,12 @@ public abstract class Animal
         return field;
     }
     
+    /**
+     * Return whether it is daytime or not.
+     * @return Whether it is daytime or not.
+     */
     protected boolean isDay()
     {
-      return time.getIsDay();
+      return Time.getIsDay();
     }
 }

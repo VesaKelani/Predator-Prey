@@ -16,7 +16,6 @@ public class ClockDisplay
     private NumberDisplay hours;
     private NumberDisplay minutes;
     private String displayString;    // simulates the actual display
-    private boolean isDay;
     
     /**
      * Constructor for ClockDisplay objects. This constructor 
@@ -74,20 +73,22 @@ public class ClockDisplay
                         minutes.getDisplayValue();
     }
     
+    /**
+     * Return the time as a string display.
+     * @return The time.
+     */
     public String getDisplay()
-    
     {
         return displayString;
     }
     
+    /**
+     * Return whether it is between 7am and 6pm,
+     * which constitutes day time.
+     * @return Whether it is daytime or not.
+     */
     public boolean isDay()
     {
-        if (hours.getValue() > 7 && hours.getValue() < 18) {
-            isDay = true;
-        }
-        else {
-            isDay = false;
-        }
-        return isDay;
+        return hours.getValue() > 7 && hours.getValue() < 18;
     }
 }

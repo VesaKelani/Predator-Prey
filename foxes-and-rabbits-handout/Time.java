@@ -1,38 +1,37 @@
-
 /**
- * Write a description of class Time here.
+ * Time during the simulation.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @Vesa Kelani
+ * @24/02/2020
  */
 public class Time
 {
-    private ClockDisplay clock;
-    private boolean isDay;
-    
-    /**
-     * Constructor for objects of class Time
-     */
-    public Time()
-    {
-        clock = new ClockDisplay(7,0);
-    }
+    //Create the clock starting from 6am
+    private static ClockDisplay clock = new ClockDisplay(6,0);
 
-    public String getDisplay()
-    
+    /**
+     * Get the display of the time.
+     * @return The time as a string.
+     */
+    public static String getDisplay()
     {
         return clock.getDisplay();
     }
     
-    public void timeTick()
-    
+    /**
+     * Tick the metaphorical clock.
+     */
+    public static void timeTick()
     {
         clock.timeTick();
-        isDay = clock.isDay();
     }
     
-    public boolean getIsDay()
+    /**
+     * Return whether it is daytime or not.
+     * @return Whether it is daytime or not.
+     */
+    public static boolean getIsDay()
     {
-        return isDay;
+        return clock.isDay();
     }
 }
