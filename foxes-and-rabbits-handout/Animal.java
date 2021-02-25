@@ -2,7 +2,7 @@ import java.util.List;
 
 /**
  * A class representing shared characteristics of animals.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
@@ -14,10 +14,10 @@ public abstract class Animal
     private Field field;
     // The animal's position in the field.
     private Location location;
-    
+
     /**
      * Create a new animal at location in field.
-     * 
+     *
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
@@ -27,7 +27,7 @@ public abstract class Animal
         this.field = field;
         setLocation(location);
     }
-    
+
     /**
      * Make this animal act - that is: make it do
      * whatever it wants/needs to do.
@@ -66,7 +66,7 @@ public abstract class Animal
     {
         return location;
     }
-    
+
     /**
      * Place the animal at the new location in the given field.
      * @param newLocation The animal's new location.
@@ -79,7 +79,7 @@ public abstract class Animal
         location = newLocation;
         field.place(this, newLocation);
     }
-    
+
     /**
      * Return the animal's field.
      * @return The animal's field.
@@ -87,5 +87,14 @@ public abstract class Animal
     protected Field getField()
     {
         return field;
+    }
+    
+    /**
+     * Return whether it is daytime or not.
+     * @return Whether it is daytime or not.
+     */
+    protected boolean isDay()
+    {
+      return Time.getIsDay();
     }
 }
