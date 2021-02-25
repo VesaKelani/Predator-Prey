@@ -9,22 +9,22 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Falcon extends Animal implements Predator
+public class Falcon extends Animal
 {
     // Characteristics shared by all falcons (class variables).
 
     // The age at which a falcon can start to breed.
     private static final int BREEDING_AGE = 2;
     // The age to which a falcon can live.
-    private static final int MAX_AGE = 19;
+    private static final int MAX_AGE = 50;
     // The likelihood of a falcon breeding.
     private static final double BREEDING_PROBABILITY = 0.04;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a falcon can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 5;
-    private static final int SNAKE_FOOD_VALUE = 5;
+    private static final int RABBIT_FOOD_VALUE = 20;
+    private static final int SNAKE_FOOD_VALUE = 20;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 
@@ -33,7 +33,6 @@ public class Falcon extends Animal implements Predator
     private int age;
     // The falcon's food level, which is increased by eating rabbits and snakes.
     private int foodLevel;
-    private String sex;
 
     /**
      * Create a falcon. A falcon can be created as a new born (age zero
@@ -54,25 +53,8 @@ public class Falcon extends Animal implements Predator
             age = 0;
             foodLevel = RABBIT_FOOD_VALUE + SNAKE_FOOD_VALUE;
         }
-        sex = generateSex();
     }
     
-    public String generateSex() {
-        if(Math.random() > 0.5) {
-            sex  = "MALE";}
-        else {sex = "FEMALE";}
-        return sex;
-    }
-    
-    /**
-     * Increase the age.
-     * Returns the animals Sex
-     */
-    public String getSex()
-    {
-        return sex;
-    }
-
     /**
      * This is what the falcon does most of the time: it hunts for
      * rabbits. In the process, it might breed, die of hunger,
@@ -186,7 +168,7 @@ public class Falcon extends Animal implements Predator
     private int breed()
     {
         int births = 0;
-        if(canBreed() &&  rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if(canBreed() && foundMate() &&  rand.nextDouble() <= BREEDING_PROBABILITY) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;

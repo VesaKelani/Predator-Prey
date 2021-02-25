@@ -32,9 +32,9 @@ public class Simulator
 
     private static final double BAT_CREATION_PROBABILITY = 0.03;
 
-    private static final double FALCON_CREATION_PROBABILITY = 0.01;
+    private static final double FALCON_CREATION_PROBABILITY = 0.03;
     
-    private static final double INSECT_CREATION_PROBABILITY = 0.07;  
+    private static final double INSECT_CREATION_PROBABILITY = 0.01;  
 
     // List of animals in the field.
     private List<Animal> animals;

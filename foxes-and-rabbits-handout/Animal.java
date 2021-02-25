@@ -16,7 +16,7 @@ public abstract class Animal
     private Location location;
     
     //animal's sex
-    
+    private String sex;
     
     /**
      * Create a new animal at location in field.
@@ -29,7 +29,28 @@ public abstract class Animal
         alive = true;
         this.field = field;
         setLocation(location);
+        sex = generateSex();
     }
+    
+    /** 
+     * random sex
+     */
+    public String generateSex() {
+        if(Math.random() > 0.5) {
+            sex  = "MALE";}
+        else {sex = "FEMALE";}
+        return sex;
+    }
+    
+    /**
+     * Increase the age.
+     * Returns the animals Sex
+     */
+    public String getSex()
+    {
+        return sex;
+    }
+    
     
     /**
      * Make this animal act - that is: make it do

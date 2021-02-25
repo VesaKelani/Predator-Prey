@@ -9,14 +9,14 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Bat extends Animal implements Predator
+public class Bat extends Animal 
 {
     // Characteristics shared by all bats (class variables).
     
     // The age at which a bat can start to breed.
     private static final int BREEDING_AGE = 2;
     // The age to which a bat can live.
-    private static final int MAX_AGE = 20;
+    private static final int MAX_AGE = 200;
     // The likelihood of a bat breeding.
     private static final double BREEDING_PROBABILITY = 0.05;
     // The maximum number of births.
@@ -28,7 +28,6 @@ public class Bat extends Animal implements Predator
     // Individual characteristics (instance fields).
     // The bat's age.
     private int age;
-    private String sex;
 
     /**
      * Create a bat. A bat can be created as a new born (age zero
@@ -47,23 +46,7 @@ public class Bat extends Animal implements Predator
         else {
             age = 0;
         }
-        sex = generateSex();
-    }
-    
-    public String generateSex() {
-        if(Math.random() > 0.5) {
-            sex  = "MALE";}
-        else {sex = "FEMALE";}
-        return sex;
-    }
-    
-    /**
-     * Increase the age.
-     * Returns the animals Sex
-     */
-    public String getSex()
-    {
-        return sex;
+        
     }
     
     /**
@@ -128,7 +111,7 @@ public class Bat extends Animal implements Predator
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if(canBreed() && foundMate() && rand.nextDouble() <= BREEDING_PROBABILITY) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;

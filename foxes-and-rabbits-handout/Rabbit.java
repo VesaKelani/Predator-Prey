@@ -15,7 +15,7 @@ public class Rabbit extends Animal
     // The age at which a rabbit can start to breed.
     private static final int BREEDING_AGE = 5;
     // The age to which a rabbit can live.
-    private static final int MAX_AGE = 40;
+    private static final int MAX_AGE = 30;
     // The likelihood of a rabbit breeding.
     private static final double BREEDING_PROBABILITY = 0.12;
     // The maximum number of births.
@@ -26,7 +26,7 @@ public class Rabbit extends Animal
 
     // The rabbit's age.
     private int age;
-    private String sex;
+    
 
     /**
      * Create a new rabbit. A rabbit may be created with age
@@ -43,29 +43,10 @@ public class Rabbit extends Animal
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
         }
-        sex = generateSex();
-    }
-    
-    /** 
-     * random sex
-     */
-    public String generateSex() {
-        if(Math.random() > 0.5) {
-            sex  = "MALE";}
-        else {sex = "FEMALE";}
-        return sex;
-    }
-    
-    /**
-     * Increase the age.
-     * Returns the animals Sex
-     */
-    public String getSex()
-    {
-        return sex;
+        
     }
 
-    /**
+     /**
      * This is what the rabbit does most of the time - it runs 
      * around. Sometimes it will breed or die of old age.
      * @param newRabbits A list to return newly born rabbits.
