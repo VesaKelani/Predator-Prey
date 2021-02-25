@@ -18,5 +18,5 @@ comment5.target=int\ breed()
 comment5.text=\r\n\ Generate\ a\ number\ representing\ the\ number\ of\ births,\r\n\ if\ it\ can\ breed.\r\n\ @return\ The\ number\ of\ births\ (may\ be\ zero).\r\n
 comment6.params=
 comment6.target=boolean\ canBreed()
-comment6.text=\r\n\ A\ bat\ can\ breed\ if\ it\ has\ reached\ the\ breeding\ age.\r\n\ @return\ If\ it\ can\ breen\ or\ not.\r\n
+comment6.text=\r\n\ A\ bat\ can\ breed\ if\ it\ has\ reached\ the\ breeding\ age.\r\n\ @return\ If\ it\ can\ breed\ or\ not.\r\n
 numComments=7

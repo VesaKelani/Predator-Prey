@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * A simple model of a bat.
  * Bats age, move, eat insects, and die.
- * 
+ 
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
@@ -32,7 +32,7 @@ public class Bat extends Animal implements Predator
     /**
      * Create a bat. A bat can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
-     * 
+     *
      * @param randomAge If true, the bat will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
@@ -49,20 +49,20 @@ public class Bat extends Animal implements Predator
     }
 
     /**
-     * The bat's behaviour, which changes whether 
-     * it is day time or not. During the day it sleeps 
+     * The bat's behaviour, which changes whether
+     * it is day time or not. During the day it sleeps
      * and during the night it might breed, die of hunger,
-     * or die of old age. 
-     * 
+     * or die of old age.
+     *
      * @param field The field currently occupied.
      * @param newBats A list to return newly born bats.
      */
     public void act(List<Animal> newBats)
     {
-        if (!isDay()) {
+        if (isDay() == false) {
             incrementAge();
             if(isAlive()) {
-                giveBirth(newBats);            
+                giveBirth(newBats);
                 // Move towards a source of food if found.
                 Location newLocation = getField().freeAdjacentLocation(getLocation());
                 if(newLocation != null) {
