@@ -9,21 +9,21 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Fox extends Animal implements Predator
+public class Fox extends Animal 
 {
     // Characteristics shared by all foxes (class variables).
     
     // The age at which a fox can start to breed.
-    private static final int BREEDING_AGE = 15;
+    private static final int BREEDING_AGE = 10;
     // The age to which a fox can live.
     private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
+    private static final double BREEDING_PROBABILITY = 0.2;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 4;
+    private static final int MAX_LITTER_SIZE = 7;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 9;
+    private static final int RABBIT_FOOD_VALUE = 20;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
@@ -52,7 +52,9 @@ public class Fox extends Animal implements Predator
             age = 0;
             foodLevel = RABBIT_FOOD_VALUE;
         }
+    
     }
+    
     
     /**
      * The fox's behaviour, which changes whether 
@@ -164,7 +166,7 @@ public class Fox extends Animal implements Predator
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if(canBreed() && foundMate() && rand.nextDouble() <= BREEDING_PROBABILITY) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;
@@ -177,4 +179,30 @@ public class Fox extends Animal implements Predator
     {
         return age >= BREEDING_AGE;
     }
+    
+    /**
+     * returns if an animal has found a mate to breed with, y'know, since we have sex now
+     */
+    private boolean foundMate() {
+
+        String sex = getSex();
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object adjacentOjbect = field.getObjectAt(where);
+            if(adjacentOjbect instanceof Fox) {
+                Fox mate = (Fox) adjacentOjbect;
+                if(mate.getSex().equals(sex)) { 
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
 }

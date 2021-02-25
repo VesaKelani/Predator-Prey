@@ -14,6 +14,9 @@ public abstract class HabitatFood
     private Location location;
     
     Random rand = new Random();
+    
+    //counts the amount of each food within the field
+    int counter = 0;
     /**
      * An example of a method - replace this comment with your own
      *
@@ -63,7 +66,22 @@ public abstract class HabitatFood
         }
     }
     
-    protected void newFood() {
-        
+    /**
+     * find free locations within the field
+     */
+    protected List<Location> findFreelocations() {
+        Field field = getField();
+        List<Location> free = new LinkedList<>();
+        for(int i = 0; i < field.getDepth(); i++) {
+            for(int j = 0; j < field.getWidth(); j++) {
+                if(field.getObjectAt(i, j) == null) {
+                    free.add(new Location(i, j));
+                    
+                }
+            }
+        }
+        Collections.shuffle(free);
+        return free;
     }
+
 }

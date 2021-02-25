@@ -185,23 +185,8 @@ public class Field
         }
         return locations;
     }
-    
-    /**
-     * get a list of all free locations
-     */
-    public List<Location> getFreeLocations(Location location) {
-        List<Location> locations = new LinkedList<>();
-        for(int i = 0; i < depth; i++) {
-            for(int j = 0; j < width; j++) {
-                if(location == null) {
-                    locations.add(new Location(i, j));
-                }
-            }
-        }
-        return locations;
-    }
 
-    /**
+     /**
      * Return the depth of the field.
      * @return The depth of the field.
      */

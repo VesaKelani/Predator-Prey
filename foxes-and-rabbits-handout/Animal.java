@@ -15,6 +15,9 @@ public abstract class Animal
     // The animal's position in the field.
     private Location location;
 
+    //animal's sex
+    private String sex;
+
     /**
      * Create a new animal at location in field.
      *
@@ -26,6 +29,26 @@ public abstract class Animal
         alive = true;
         this.field = field;
         setLocation(location);
+        sex = generateSex();
+    }
+
+    /**
+     * random sex
+     */
+    public String generateSex() {
+        if(Math.random() > 0.5) {
+            sex  = "MALE";}
+        else {sex = "FEMALE";}
+        return sex;
+    }
+
+    /**
+     * Increase the age.
+     * Returns the animals Sex
+     */
+    public String getSex()
+    {
+        return sex;
     }
 
     /**
@@ -43,6 +66,7 @@ public abstract class Animal
     {
         return alive;
     }
+
 
     /**
      * Indicate that the animal is no longer alive.
@@ -88,7 +112,7 @@ public abstract class Animal
     {
         return field;
     }
-    
+
     /**
      * Return whether it is daytime or not.
      * @return Whether it is daytime or not.

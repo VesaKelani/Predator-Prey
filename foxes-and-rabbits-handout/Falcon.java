@@ -5,26 +5,26 @@ import java.util.Random;
 /**
  * A simple model of a falcon.
  * Falcons age, move, eat rabbits, and die.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Falcon extends Animal implements Predator
+public class Falcon extends Animal
 {
     // Characteristics shared by all falcons (class variables).
 
     // The age at which a falcon can start to breed.
     private static final int BREEDING_AGE = 2;
     // The age to which a falcon can live.
-    private static final int MAX_AGE = 19;
+    private static final int MAX_AGE = 50;
     // The likelihood of a falcon breeding.
     private static final double BREEDING_PROBABILITY = 0.04;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a falcon can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 5;
-    private static final int SNAKE_FOOD_VALUE = 5;
+    private static final int RABBIT_FOOD_VALUE = 20;
+    private static final int SNAKE_FOOD_VALUE = 20;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 
@@ -37,7 +37,7 @@ public class Falcon extends Animal implements Predator
     /**
      * Create a falcon. A falcon can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
-     * 
+     *
      * @param randomAge If true, the falcon will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
@@ -56,10 +56,10 @@ public class Falcon extends Animal implements Predator
     }
 
     /**
-     * The falcon's behaviour, which changes whether 
-     * it is day time or not. During the night it sleeps 
+     * The falcon's behaviour, which changes whether
+     * it is day time or not. During the night it sleeps
      * and during the day it might breed, die of hunger,
-     * or die of old age. 
+     * or die of old age.
      * @param field The field currently occupied.
      * @param newFalcons A list to return newly born falcons.
      */
@@ -69,10 +69,10 @@ public class Falcon extends Animal implements Predator
             incrementAge();
             incrementHunger();
             if(isAlive()) {
-                giveBirth(newFalcons);            
+                giveBirth(newFalcons);
                 // Move towards a source of food if found.
                 Location newLocation = findFood();
-                if(newLocation == null) { 
+                if(newLocation == null) {
                     // No food found - try to move to a free location.
                     newLocation = getField().freeAdjacentLocation(getLocation());
                 }
@@ -128,21 +128,16 @@ public class Falcon extends Animal implements Predator
             Object animal = field.getObjectAt(where);
             if(animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
-                //Snake snake = (Snake) animal;
-                if(rabbit.isAlive()) { 
+
+                if(rabbit.isAlive()) {
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
                     return where;
                 }
-                // else if(snake.isAlive()) {
-                // snake.setDead();
-                // foodLevel = SNAKE_FOOD_VALUE;
-                // return where;
-                // }
             }
             else if (animal instanceof Snake) {
                 Snake snake = (Snake) animal;
-                if(snake.isAlive()) { 
+                if(snake.isAlive()) {
                     snake.setDead();
                     foodLevel = SNAKE_FOOD_VALUE;
                     return where;
@@ -179,7 +174,7 @@ public class Falcon extends Animal implements Predator
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if(canBreed() && foundMate() &&  rand.nextDouble() <= BREEDING_PROBABILITY) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;
@@ -191,5 +186,30 @@ public class Falcon extends Animal implements Predator
     public boolean canBreed()
     {
         return age >= BREEDING_AGE;
+    }
+
+    /**
+     * returns if an animal has found a mate to breed with, y'know, since we have sex now
+     */
+    private boolean foundMate() {
+
+        String sex = getSex();
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object adjacentOjbect = field.getObjectAt(where);
+            if(adjacentOjbect instanceof Falcon) {
+                Falcon mate = (Falcon) adjacentOjbect;
+                if(mate.getSex().equals(sex)) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

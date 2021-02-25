@@ -9,14 +9,14 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Bat extends Animal implements Predator
+public class Bat extends Animal 
 {
     // Characteristics shared by all bats (class variables).
 
     // The age at which a bat can start to breed.
     private static final int BREEDING_AGE = 2;
     // The age to which a bat can live.
-    private static final int MAX_AGE = 20;
+    private static final int MAX_AGE = 200;
     // The likelihood of a bat breeding.
     private static final double BREEDING_PROBABILITY = 0.04;
     // The maximum number of births.
@@ -46,6 +46,7 @@ public class Bat extends Animal implements Predator
         else {
             age = 0;
         }
+        
     }
 
     /**
@@ -117,7 +118,7 @@ public class Bat extends Animal implements Predator
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if(canBreed() && foundMate() && rand.nextDouble() <= BREEDING_PROBABILITY) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;
@@ -130,5 +131,30 @@ public class Bat extends Animal implements Predator
     public boolean canBreed()
     {
         return age >= BREEDING_AGE;
+    }
+    
+    /**
+     * returns if an animal has found a mate to breed with, y'know, since we have sex now
+     */
+    private boolean foundMate() {
+
+        String sex = getSex();
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object adjacentOjbect = field.getObjectAt(where);
+            if(adjacentOjbect instanceof Bat) {
+                Bat mate = (Bat) adjacentOjbect;
+                if(mate.getSex().equals(sex)) { 
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

@@ -8,13 +8,12 @@ import java.util.*;
 public class Flower extends HabitatFood
 {
     // variables shared by all flowers
-    private static final int MAX_AGE = 500;
+    private static final int MAX_AGE = 50;
     private static final Random rand = Randomizer.getRandom();
-    
+    private static final double GROW_PROBABILITY = 0.02;
+    private static final int MAX_FLOWER_GROWN = 1;
     //each specific flower age
     private int age;
-    
-
     /**
      * Constructor for objects of class Flower
      */
@@ -28,10 +27,7 @@ public class Flower extends HabitatFood
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     *increments the age of the flower
      */
     private void incrementAge()
     {
@@ -41,20 +37,59 @@ public class Flower extends HabitatFood
         }
     }
     
-    public void act(List<HabitatFood> newFlowers)
-    {
-        incrementAge();
-        // if(!isAlive()) {
-                      
-            // // Try to move into a free location.
-            // Location newLocation = getField().freeAdjacentLocation(getLocation());
-            // if(newLocation != null) {
-                // setLocation(newLocation);
-            // }
-            // else {
-                // // Overcrowding.
-                // setDead();
-            // }
-        // }
+    /**
+     *how the flower will act during the simulation
+     */
+    public void act(List<HabitatFood> newFlowers) {
+        incrementAge(); 
+        if(isAlive()) {
+            growNewFlowers(newFlowers);
+        } 
     }
+    
+    /** 
+     * generate number of grass to grow
+     */
+    private int grow() {
+        int baby = 0;
+        int flowerTotal = getFlowerTotal();
+        if(flowerTotal <500 && rand.nextDouble() <= GROW_PROBABILITY) {
+            baby = rand.nextInt(MAX_FLOWER_GROWN) + 1;
+        }
+        return baby;
+    }
+    
+    /**
+     * grow new flowers in random free locations
+     */
+    private void growNewFlowers(List<HabitatFood> newFlowers) {
+        int babyFlower = grow();
+        Field field = getField();
+        List<Location> free = findFreelocations();
+        for (int i = 0; i < babyFlower && free.size() > 0; i++) {
+            Location loc = free.remove(0);
+            Flower baby= new Flower(false, field, loc);
+            newFlowers.add(baby);
+            counter += 1;
+        }
+
+    }
+    
+    /**
+     * get total amount of flowers in the field
+     */ 
+    public int getFlowerTotal() {
+        Field field = getField();
+        int total = 0;
+        for(int i = 0; i < field.getDepth(); i++) {
+            for(int j = 0; j < field.getWidth(); j++) {
+                if(field.getObjectAt(i, j) instanceof Flower) {
+                    
+                    total += 1;
+                }
+            }
+        }
+        return total;
+    }
+    
 }
