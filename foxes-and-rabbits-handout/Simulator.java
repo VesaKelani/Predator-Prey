@@ -8,7 +8,7 @@ import java.awt.Color;
  * test*******************
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
@@ -22,19 +22,20 @@ public class Simulator
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.03;  
+    private static final double RABBIT_CREATION_PROBABILITY = 0.05;
     // The probability that a snake will be created in any given grid position.
-    private static final double SNAKE_CREATION_PROBABILITY = 0.02;  
+    private static final double SNAKE_CREATION_PROBABILITY = 0.02;
 
-    private static final double FLOWER_CREATION_PROBABILITY = 0.02;  
+    private static final double FLOWER_CREATION_PROBABILITY = 0.02;
 
-    private static final double GRASS_CREATION_PROBABILITY = 0.07;  
+    private static final double GRASS_CREATION_PROBABILITY = 0.07;
 
     private static final double BAT_CREATION_PROBABILITY = 0.03;
 
     private static final double FALCON_CREATION_PROBABILITY = 0.03;
-    
-    private static final double INSECT_CREATION_PROBABILITY = 0.01;  
+
+    private static final double INSECT_CREATION_PROBABILITY = 0.01;
+
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -46,6 +47,7 @@ public class Simulator
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
+
 
     /**
      * Construct a simulation field with default size.
@@ -106,7 +108,7 @@ public class Simulator
     {
         for(int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
-            // delay(60);   // uncomment this to run more slowly
+            delay(60);   // uncomment this to run more slowly
         }
     }
 
@@ -118,9 +120,10 @@ public class Simulator
     public void simulateOneStep()
     {
         step++;
+        view.timeTick();
 
         // Provide space for newborn animals.
-        List<Animal> newAnimals = new ArrayList<>();     
+        List<Animal> newAnimals = new ArrayList<>();
         List<HabitatFood> newPlants = new ArrayList<>();
         // Let all rabbits act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
@@ -143,6 +146,15 @@ public class Simulator
         habitatfood.addAll(newPlants);
 
         view.showStatus(step, field);
+    }
+
+    /**
+     * Return the total steps so far.
+     * @return The total steps.
+     */
+    public int getSteps()
+    {
+        return step;
     }
 
     /**

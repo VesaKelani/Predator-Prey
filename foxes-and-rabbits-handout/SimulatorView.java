@@ -24,14 +24,16 @@ public class SimulatorView extends JFrame
 
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
-    private JLabel stepLabel, population, infoLabel;
+    private final String CLOCK_PREFIX = "Time: ";
+    private JLabel stepLabel, population, infoLabel, clockLabel;
     private FieldView fieldView;
     
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
-
+    
+    
     /**
      * Create a view of the given width and height.
      * @param height The simulation's height.
@@ -41,11 +43,14 @@ public class SimulatorView extends JFrame
     {
         stats = new FieldStats();
         colors = new LinkedHashMap<>();
+        
 
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         infoLabel = new JLabel("  ", JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
+        
+        clockLabel = new JLabel(CLOCK_PREFIX, JLabel.CENTER);
         
         setLocation(100, 50);
         
@@ -56,6 +61,8 @@ public class SimulatorView extends JFrame
         JPanel infoPane = new JPanel(new BorderLayout());
             infoPane.add(stepLabel, BorderLayout.WEST);
             infoPane.add(infoLabel, BorderLayout.CENTER);
+            infoPane.add(clockLabel, BorderLayout.EAST);
+        
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
@@ -82,7 +89,9 @@ public class SimulatorView extends JFrame
     }
 
     /**
-     * @return The color to be used for a given class of animal.
+     * Return the color used for the animal class.
+     * @param The animal class.
+     * @return The color to be used for the class.
      */
     private Color getColor(Class animalClass)
     {
@@ -127,11 +136,22 @@ public class SimulatorView extends JFrame
         stats.countFinished();
 
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
+        
+        clockLabel.setText(CLOCK_PREFIX + Time.getDisplay() );
         fieldView.repaint();
+    }
+    
+    /**
+     * Increase the time (tick the clock).
+     */
+    public void timeTick()
+    {
+        Time.timeTick();
     }
 
     /**
      * Determine whether the simulation should continue to run.
+     * @param The field in question.
      * @return true If there is more than one species alive.
      */
     public boolean isViable(Field field)

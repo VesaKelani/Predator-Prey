@@ -57,32 +57,38 @@ public class Fox extends Animal
     
     
     /**
-     * This is what the fox does most of the time: it hunts for
-     * rabbits. In the process, it might breed, die of hunger,
-     * or die of old age.
+     * The fox's behaviour, which changes whether 
+     * it is day time or not. During the night it sleeps 
+     * and during the day it might breed, die of hunger,
+     * or die of old age. 
      * @param field The field currently occupied.
      * @param newFoxes A list to return newly born foxes.
      */
     public void act(List<Animal> newFoxes)
     {
-        incrementAge();
-        incrementHunger();
-        if(isAlive()) {
-            giveBirth(newFoxes);            
-            // Move towards a source of food if found.
-            Location newLocation = findFood();
-            if(newLocation == null) { 
-                // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
+        if (isDay()){
+            incrementAge();
+            incrementHunger();
+            if(isAlive()) {
+                giveBirth(newFoxes);            
+                // Move towards a source of food if found.
+                Location newLocation = findFood();
+                if(newLocation == null) { 
+                    // No food found - try to move to a free location.
+                    newLocation = getField().freeAdjacentLocation(getLocation());
+                }
+                // See if it was possible to move.
+                if(newLocation != null) {
+                    setLocation(newLocation);
+                }
+                else {
+                    // Overcrowding.
+                    setDead();
+                }
             }
-            // See if it was possible to move.
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
+        }
+        else {
+            //sleep
         }
     }
 

@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * A simple model of a falcon.
  * Falcons age, move, eat rabbits, and die.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
@@ -37,7 +37,7 @@ public class Falcon extends Animal
     /**
      * Create a falcon. A falcon can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
-     * 
+     *
      * @param randomAge If true, the falcon will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
@@ -54,34 +54,40 @@ public class Falcon extends Animal
             foodLevel = RABBIT_FOOD_VALUE + SNAKE_FOOD_VALUE;
         }
     }
-    
+
     /**
-     * This is what the falcon does most of the time: it hunts for
-     * rabbits. In the process, it might breed, die of hunger,
+     * The falcon's behaviour, which changes whether
+     * it is day time or not. During the night it sleeps
+     * and during the day it might breed, die of hunger,
      * or die of old age.
      * @param field The field currently occupied.
      * @param newFalcons A list to return newly born falcons.
      */
     public void act(List<Animal> newFalcons)
     {
-        incrementAge();
-        incrementHunger();
-        if(isAlive()) {
-            giveBirth(newFalcons);            
-            // Move towards a source of food if found.
-            Location newLocation = findFood();
-            if(newLocation == null) { 
-                // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
+        if (isDay()) {
+            incrementAge();
+            incrementHunger();
+            if(isAlive()) {
+                giveBirth(newFalcons);
+                // Move towards a source of food if found.
+                Location newLocation = findFood();
+                if(newLocation == null) {
+                    // No food found - try to move to a free location.
+                    newLocation = getField().freeAdjacentLocation(getLocation());
+                }
+                // See if it was possible to move.
+                if(newLocation != null) {
+                    setLocation(newLocation);
+                }
+                else {
+                    // Overcrowding.
+                    setDead();
+                }
             }
-            // See if it was possible to move.
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
+        }
+        else {
+            //sleep
         }
     }
 
@@ -123,7 +129,7 @@ public class Falcon extends Animal
             if(animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
 
-                if(rabbit.isAlive()) { 
+                if(rabbit.isAlive()) {
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
                     return where;
@@ -131,7 +137,7 @@ public class Falcon extends Animal
             }
             else if (animal instanceof Snake) {
                 Snake snake = (Snake) animal;
-                if(snake.isAlive()) { 
+                if(snake.isAlive()) {
                     snake.setDead();
                     foodLevel = SNAKE_FOOD_VALUE;
                     return where;
@@ -181,7 +187,7 @@ public class Falcon extends Animal
     {
         return age >= BREEDING_AGE;
     }
-    
+
     /**
      * returns if an animal has found a mate to breed with, y'know, since we have sex now
      */
@@ -196,7 +202,7 @@ public class Falcon extends Animal
             Object adjacentOjbect = field.getObjectAt(where);
             if(adjacentOjbect instanceof Falcon) {
                 Falcon mate = (Falcon) adjacentOjbect;
-                if(mate.getSex().equals(sex)) { 
+                if(mate.getSex().equals(sex)) {
                     return false;
                 }
                 else {
