@@ -8,14 +8,14 @@ import java.util.*;
 public class Flower extends HabitatFood
 {
     // variables shared by all flowers
-    private static final int MAX_AGE = 500;
+    private static final int MAX_AGE = 50;
     private static final Random rand = Randomizer.getRandom();
-    private static final double GROW_PROBABILITY = 0.04;
+    private static final double GROW_PROBABILITY = 0.02;
     private static final int MAX_GRASS_GROWN = 1;
     //each specific flower age
     private int age;
-    private int totalFlowers = 0;
-    
+    //private int totalFlowers = 0;
+    int counter = 0;
     /**
      * Constructor for objects of class Flower
      */
@@ -44,7 +44,8 @@ public class Flower extends HabitatFood
     
     public void act(List<HabitatFood> newFlowers) {
         incrementAge(); 
-        if(isAlive() && totalFlowers < 50) {
+        
+        if(isAlive()) {
             growNewFlowers(newFlowers);
         } 
     }
@@ -54,10 +55,10 @@ public class Flower extends HabitatFood
      */
     private int grow() {
         int babyFlower = 0;
-        
-        if(rand.nextDouble() <= GROW_PROBABILITY) {
+        int flowerTotal = getFlowerTotal();
+        if(flowerTotal <500 && rand.nextDouble() <= GROW_PROBABILITY) {
             babyFlower = rand.nextInt(MAX_GRASS_GROWN) + 1;
-            totalFlowers += babyFlower;
+            //totalFlowers += babyFlower;
         }
         return babyFlower;
     }
@@ -69,12 +70,12 @@ public class Flower extends HabitatFood
         Field field = getField();
         List<Location> free = new LinkedList<>();
         int babyFlower = grow();
-        int count = 0;
+        
         for(int i = 0; i < field.getDepth(); i++) {
             for(int j = 0; j < field.getWidth(); j++) {
                 if(field.getObjectAt(i, j) == null) {
                     free.add(new Location(i, j));
-                    count += 1;
+                    
                 }
             }
         }
@@ -84,7 +85,22 @@ public class Flower extends HabitatFood
             Location loc = free.remove(0);
             Flower baby= new Flower(false, field, loc);
             newFlowers.add(baby);
+            counter += 1;
         }
 
+    }
+    
+    private int getFlowerTotal() {
+        Field field = getField();
+        int total = 0;
+        for(int i = 0; i < field.getDepth(); i++) {
+            for(int j = 0; j < field.getWidth(); j++) {
+                if(field.getObjectAt(i, j) instanceof Flower) {
+                    
+                    total += 1;
+                }
+            }
+        }
+        return total;
     }
 }

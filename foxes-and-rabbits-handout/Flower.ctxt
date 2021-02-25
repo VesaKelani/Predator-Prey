@@ -15,4 +15,6 @@ comment4.text=\ \r\n\ generate\ number\ of\ grass\ to\ grow\r\n
 comment5.params=newFlowers
 comment5.target=void\ growNewFlowers(java.util.List)
 comment5.text=\r\n\ grow\ new\ grass\ in\ random\ free\ locations\r\n
-numComments=6
+comment6.params=
+comment6.target=int\ getFlowerTotal()
+numComments=7
