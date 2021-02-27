@@ -89,6 +89,9 @@ public class Falcon extends Animal
         else {
             //sleep
         }
+        if (hasDisease()) {
+            HPLoss(20);
+        }
     }
 
     /**
@@ -132,6 +135,9 @@ public class Falcon extends Animal
                 if(rabbit.isAlive()) {
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
+                    if (rabbit.hasDisease()) {
+                        becomesDiseased();
+                    }
                     return where;
                 }
             }
@@ -140,6 +146,9 @@ public class Falcon extends Animal
                 if(snake.isAlive()) {
                     snake.setDead();
                     foodLevel = SNAKE_FOOD_VALUE;
+                    if (snake.hasDisease()) {
+                        becomesDiseased();
+                    }
                     return where;
                 }
             }

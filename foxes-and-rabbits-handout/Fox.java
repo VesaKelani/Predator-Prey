@@ -90,6 +90,9 @@ public class Fox extends Animal
         else {
             //sleep
         }
+        if (hasDisease()) {
+            HPLoss(20);
+        }
     }
 
     /**
@@ -132,6 +135,9 @@ public class Fox extends Animal
                 if(rabbit.isAlive()) { 
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
+                    if (rabbit.hasDisease()) {
+                        becomesDiseased();
+                    }
                     return where;
                 }
             }
