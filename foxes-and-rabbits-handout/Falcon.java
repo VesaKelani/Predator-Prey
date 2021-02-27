@@ -68,7 +68,7 @@ public class Falcon extends Animal
         if (isDay()) {
             incrementAge();
             incrementHunger();
-            if(isAlive()) {
+            if(isAlive() && currentWeather() != "Snow") {
                 giveBirth(newFalcons);
                 // Move towards a source of food if found.
                 Location newLocation = findFood();
@@ -89,6 +89,7 @@ public class Falcon extends Animal
         else {
             //sleep
         }
+        foodLevel = halfFoodLevel(foodLevel);
         if (hasDisease()) {
             HPLoss(20);
         }

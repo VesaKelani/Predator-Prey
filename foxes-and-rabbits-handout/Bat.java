@@ -5,11 +5,11 @@ import java.util.Random;
 /**
  * A simple model of a bat.
  * Bats age, move, eat insects, and die.
- 
+
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Bat extends Animal 
+public class Bat extends Animal
 {
     // Characteristics shared by all bats (class variables).
 
@@ -31,7 +31,7 @@ public class Bat extends Animal
     // The bat's age.
     private int age;
     private int foodLevel;
-    
+
     /**
      * Create a bat. A bat can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
@@ -50,7 +50,7 @@ public class Bat extends Animal
             age = 0;
             foodLevel = INSECT_FOOD_VALUE;
         }
-        
+
     }
 
     /**
@@ -66,8 +66,7 @@ public class Bat extends Animal
     {
         if (isDay() == false) {
             incrementAge();
-            incrementHunger();
-            if(isAlive()) {
+            if(isAlive() && currentWeather() != "Rain") {
                 giveBirth(newBats);
                 // Move towards a source of food if found.
                 Location newLocation = getField().freeAdjacentLocation(getLocation());
@@ -98,7 +97,7 @@ public class Bat extends Animal
             setDead();
         }
     }
-    
+
         /**
      * Make this bat more hungry. This could result in the bat's death.
      */
@@ -109,7 +108,7 @@ public class Bat extends Animal
             setDead();
         }
     }
-    
+
     private Location findFood()
     {
         Field field = getField();
@@ -174,7 +173,7 @@ public class Bat extends Animal
     {
         return age >= BREEDING_AGE;
     }
-    
+
     /**
      * returns if an animal has found a mate to breed with, y'know, since we have sex now
      */
@@ -189,7 +188,7 @@ public class Bat extends Animal
             Object adjacentOjbect = field.getObjectAt(where);
             if(adjacentOjbect instanceof Bat) {
                 Bat mate = (Bat) adjacentOjbect;
-                if(mate.getSex().equals(sex)) { 
+                if(mate.getSex().equals(sex)) {
                     return false;
                 }
                 else {

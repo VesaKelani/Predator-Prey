@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=WeatherState
+comment0.text=\r\n\ Is\ the\ current\ weather\ state.\r\n\r\n\ @Vesa\ Kelani\r\n\ @20/02/2021\r\n
+comment1.params=
+comment1.target=void\ changeWeather()
+comment2.params=
+comment2.target=java.lang.String\ getCurrentWeather()
+numComments=3

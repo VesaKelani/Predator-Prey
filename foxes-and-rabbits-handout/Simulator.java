@@ -120,8 +120,12 @@ public class Simulator
     public void simulateOneStep()
     {
         step++;
-        view.timeTick();
-
+        //Increment time.
+        Time.timeTick();
+        //Change weather if necessary.
+        WeatherState.changeWeather();
+        
+    
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();
         List<HabitatFood> newPlants = new ArrayList<>();

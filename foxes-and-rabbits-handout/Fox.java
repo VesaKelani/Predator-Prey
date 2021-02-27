@@ -5,14 +5,14 @@ import java.util.Random;
 /**
  * A simple model of a fox.
  * Foxes age, move, eat rabbits, and die.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Fox extends Animal 
+public class Fox extends Animal
 {
     // Characteristics shared by all foxes (class variables).
-    
+
     // The age at which a fox can start to breed.
     private static final int BREEDING_AGE = 10;
     // The age to which a fox can live.
@@ -26,7 +26,7 @@ public class Fox extends Animal
     private static final int RABBIT_FOOD_VALUE = 20;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-    
+
     // Individual characteristics (instance fields).
     // The fox's age.
     private int age;
@@ -36,7 +36,7 @@ public class Fox extends Animal
     /**
      * Create a fox. A fox can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
-     * 
+     *
      * @param randomAge If true, the fox will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
@@ -52,15 +52,15 @@ public class Fox extends Animal
             age = 0;
             foodLevel = RABBIT_FOOD_VALUE;
         }
-    
+
     }
-    
-    
+
+
     /**
-     * The fox's behaviour, which changes whether 
-     * it is day time or not. During the night it sleeps 
+     * The fox's behaviour, which changes whether
+     * it is day time or not. During the night it sleeps
      * and during the day it might breed, die of hunger,
-     * or die of old age. 
+     * or die of old age.
      * @param field The field currently occupied.
      * @param newFoxes A list to return newly born foxes.
      */
@@ -69,11 +69,11 @@ public class Fox extends Animal
         if (isDay()){
             incrementAge();
             incrementHunger();
-            if(isAlive()) {
-                giveBirth(newFoxes);            
+            if(isAlive() && currentWeather() != "Snow") {
+                giveBirth(newFoxes);
                 // Move towards a source of food if found.
                 Location newLocation = findFood();
-                if(newLocation == null) { 
+                if(newLocation == null) {
                     // No food found - try to move to a free location.
                     newLocation = getField().freeAdjacentLocation(getLocation());
                 }
@@ -90,6 +90,8 @@ public class Fox extends Animal
         else {
             //sleep
         }
+
+        foodLevel = halfFoodLevel(foodLevel);
         if (hasDisease()) {
             HPLoss(20);
         }
@@ -105,7 +107,7 @@ public class Fox extends Animal
             setDead();
         }
     }
-    
+
     /**
      * Make this fox more hungry. This could result in the fox's death.
      */
@@ -116,7 +118,7 @@ public class Fox extends Animal
             setDead();
         }
     }
-    
+
     /**
      * Look for rabbits adjacent to the current location.
      * Only the first live rabbit is eaten.
@@ -132,7 +134,7 @@ public class Fox extends Animal
             Object animal = field.getObjectAt(where);
             if(animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
-                if(rabbit.isAlive()) { 
+                if(rabbit.isAlive()) {
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
                     if (rabbit.hasDisease()) {
@@ -144,7 +146,7 @@ public class Fox extends Animal
         }
         return null;
     }
-    
+
     /**
      * Check whether or not this fox is to give birth at this step.
      * New births will be made into free adjacent locations.
@@ -163,7 +165,7 @@ public class Fox extends Animal
             newFoxes.add(young);
         }
     }
-        
+
     /**
      * Generate a number representing the number of births,
      * if it can breed.
@@ -185,7 +187,7 @@ public class Fox extends Animal
     {
         return age >= BREEDING_AGE;
     }
-    
+
     /**
      * returns if an animal has found a mate to breed with, y'know, since we have sex now
      */
@@ -200,7 +202,7 @@ public class Fox extends Animal
             Object adjacentOjbect = field.getObjectAt(where);
             if(adjacentOjbect instanceof Fox) {
                 Fox mate = (Fox) adjacentOjbect;
-                if(mate.getSex().equals(sex)) { 
+                if(mate.getSex().equals(sex)) {
                     return false;
                 }
                 else {
@@ -210,5 +212,5 @@ public class Fox extends Animal
         }
         return false;
     }
-    
+
 }
