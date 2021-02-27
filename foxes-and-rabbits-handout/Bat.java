@@ -62,7 +62,7 @@ public class Bat extends Animal
     {
         if (isDay() == false) {
             incrementAge();
-            if(isAlive()) {
+            if(isAlive() && currentWeather() != "Rain") {
                 giveBirth(newBats);
                 // Move towards a source of food if found.
                 Location newLocation = getField().freeAdjacentLocation(getLocation());

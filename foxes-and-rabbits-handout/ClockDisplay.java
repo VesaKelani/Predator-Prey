@@ -91,4 +91,14 @@ public class ClockDisplay
     {
         return hours.getValue() > 7 && hours.getValue() < 18;
     }
+
+    public int getHours()
+    {
+        return hours.getValue();
+    }
+    
+    public int getMinutes()
+    {
+        return minutes.getValue();
+    }
 }

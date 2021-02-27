@@ -69,7 +69,7 @@ public class Fox extends Animal
         if (isDay()){
             incrementAge();
             incrementHunger();
-            if(isAlive()) {
+            if(isAlive() && currentWeather() != "Snow") {
                 giveBirth(newFoxes);            
                 // Move towards a source of food if found.
                 Location newLocation = findFood();
@@ -90,6 +90,7 @@ public class Fox extends Animal
         else {
             //sleep
         }
+        foodLevel = halfFoodLevel(foodLevel);
     }
 
     /**

@@ -121,4 +121,19 @@ public abstract class Animal
     {
       return Time.getIsDay();
     }
+    
+    protected String currentWeather()
+    {
+        return WeatherState.getCurrentWeather();
+    }
+    
+    protected int halfFoodLevel(int foodLevel)
+    {
+        if (WeatherState.getCurrentWeather() == "Sun"){
+            return foodLevel/2;
+        }
+        else {
+            return foodLevel;
+        }
+    }
 }

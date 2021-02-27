@@ -88,6 +88,7 @@ public class Simulator
 
         // Setup a valid starting point.
         reset();
+        WeatherState.weatherChange();
     }
 
     /**
@@ -120,8 +121,11 @@ public class Simulator
     public void simulateOneStep()
     {
         step++;
-        view.timeTick();
-
+        //Increment time.
+        Time.timeTick();
+        //Change weather if necessary.
+        WeatherState.weatherChange();
+    
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();
         List<HabitatFood> newPlants = new ArrayList<>();

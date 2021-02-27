@@ -34,4 +34,14 @@ public class Time
     {
         return clock.isDay();
     }
+    
+    public static int getHours()
+    {
+        return clock.getHours();
+    }
+    
+    public static int getMinutes()
+    {
+        return clock.getMinutes();
+    }
 }

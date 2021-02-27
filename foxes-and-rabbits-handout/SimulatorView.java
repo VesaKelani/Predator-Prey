@@ -25,14 +25,15 @@ public class SimulatorView extends JFrame
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
     private final String CLOCK_PREFIX = "Time: ";
-    private JLabel stepLabel, population, infoLabel, clockLabel;
+    private final String WEATHER_PREFIX = "Weather: ";
+    
+    private JLabel stepLabel, population, infoLabel, clockLabel, weatherLabel;
     private FieldView fieldView;
     
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
-    
     
     /**
      * Create a view of the given width and height.
@@ -51,6 +52,7 @@ public class SimulatorView extends JFrame
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         
         clockLabel = new JLabel(CLOCK_PREFIX, JLabel.CENTER);
+        weatherLabel = new JLabel(WEATHER_PREFIX, JLabel.CENTER);
         
         setLocation(100, 50);
         
@@ -62,6 +64,7 @@ public class SimulatorView extends JFrame
             infoPane.add(stepLabel, BorderLayout.WEST);
             infoPane.add(infoLabel, BorderLayout.CENTER);
             infoPane.add(clockLabel, BorderLayout.EAST);
+            infoPane.add(weatherLabel, BorderLayout.NORTH);
         
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
@@ -136,17 +139,10 @@ public class SimulatorView extends JFrame
         stats.countFinished();
 
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
-        
         clockLabel.setText(CLOCK_PREFIX + Time.getDisplay() );
+        weatherLabel.setText(WEATHER_PREFIX + WeatherState.getCurrentWeather());
+        
         fieldView.repaint();
-    }
-    
-    /**
-     * Increase the time (tick the clock).
-     */
-    public void timeTick()
-    {
-        Time.timeTick();
     }
 
     /**
