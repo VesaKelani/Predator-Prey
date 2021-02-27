@@ -73,6 +73,9 @@ public class Rabbit extends Animal
         else {
             //sleep
         }
+        if (hasDisease()) {
+            HPLoss(20);
+        }
     }
 
 
@@ -133,12 +136,17 @@ public class Rabbit extends Animal
                 Flower flower = (Flower) plant;
                 if(flower.isAlive()) {
                     flower.setDead();
+                    if (flower.hasDisease()) {
+                        becomesDiseased();
+                    }
                     return where;
                 }
             }
         }
         return null;
     }
+    
+    
 
     /**
      * A rabbit can breed if it has reached the breeding age.

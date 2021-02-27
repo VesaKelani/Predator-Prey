@@ -17,6 +17,11 @@ public abstract class Animal
 
     //animal's sex
     private String sex;
+    
+    //if animal has caught a disease
+    private boolean hasDisease;
+    //health points
+    private int HP;
 
     /**
      * Create a new animal at location in field.
@@ -27,9 +32,34 @@ public abstract class Animal
     public Animal(Field field, Location location)
     {
         alive = true;
+        hasDisease = false;
+        HP = 100;
         this.field = field;
         setLocation(location);
         sex = generateSex();
+    }
+    
+    /**
+     * animal becomes diseased
+     */
+    protected boolean becomesDiseased() {
+        return hasDisease = true;
+    }
+    
+    /**
+     * decrease HP by a given number
+     */
+    protected int HPLoss(int loss) {
+        return HP -= loss;
+    }
+    
+    
+    
+    /**
+     * returns if the food has disease
+     */
+    protected boolean hasDisease() {
+        return hasDisease;
     }
 
     /**

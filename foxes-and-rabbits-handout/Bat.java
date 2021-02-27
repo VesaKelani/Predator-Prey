@@ -21,6 +21,8 @@ public class Bat extends Animal
     private static final double BREEDING_PROBABILITY = 0.04;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 2;
+    //food value for each eaten insect
+    private static final int INSECT_FOOD_VALUE = 20;
 
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
@@ -28,7 +30,8 @@ public class Bat extends Animal
     // Individual characteristics (instance fields).
     // The bat's age.
     private int age;
-
+    private int foodLevel;
+    
     /**
      * Create a bat. A bat can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
@@ -45,6 +48,7 @@ public class Bat extends Animal
         }
         else {
             age = 0;
+            foodLevel = INSECT_FOOD_VALUE;
         }
         
     }
@@ -62,6 +66,7 @@ public class Bat extends Animal
     {
         if (isDay() == false) {
             incrementAge();
+            incrementHunger();
             if(isAlive()) {
                 giveBirth(newBats);
                 // Move towards a source of food if found.
@@ -78,6 +83,9 @@ public class Bat extends Animal
         else {
             //sleep
         }
+        if (hasDisease()) {
+            HPLoss(20);
+        }
     }
 
     /**
@@ -89,6 +97,40 @@ public class Bat extends Animal
         if(age > MAX_AGE) {
             setDead();
         }
+    }
+    
+        /**
+     * Make this bat more hungry. This could result in the bat's death.
+     */
+    private void incrementHunger()
+    {
+        foodLevel--;
+        if(foodLevel <= 0) {
+            setDead();
+        }
+    }
+    
+    private Location findFood()
+    {
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object plant = field.getObjectAt(where);
+            if(plant instanceof Flower) {
+                Insect insect = (Insect) plant;
+                if(insect.isAlive()) {
+                    insect.setDead();
+                    foodLevel = INSECT_FOOD_VALUE;
+                    if (insect.hasDisease()) {
+                        becomesDiseased();
+                    }
+                    return where;
+                }
+            }
+        }
+        return null;
     }
 
     /**
