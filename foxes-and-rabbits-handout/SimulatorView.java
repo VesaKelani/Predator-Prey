@@ -3,6 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * A graphical view of the simulation grid.
@@ -35,6 +36,10 @@ public class SimulatorView extends JFrame
     // A statistics object computing and storing simulation information
     private FieldStats stats;
     
+    private MusicOrganizer musicOrganizer;
+    private boolean playingSound = false;
+    private Random rand;
+    
     /**
      * Create a view of the given width and height.
      * @param height The simulation's height.
@@ -44,12 +49,16 @@ public class SimulatorView extends JFrame
     {
         stats = new FieldStats();
         colors = new LinkedHashMap<>();
+        musicOrganizer = new MusicOrganizer();
+        rand = new Random();
         
-
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
-        infoLabel = new JLabel("  ", JLabel.CENTER);
+        //infoLabel = new JLabel("  ", JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
+        
+        JButton soundButton = new JButton("Start/Stop");
+        soundButton.addActionListener(this::startOrStop);
         
         clockLabel = new JLabel(CLOCK_PREFIX, JLabel.CENTER);
         weatherLabel = new JLabel(WEATHER_PREFIX, JLabel.CENTER);
@@ -62,15 +71,27 @@ public class SimulatorView extends JFrame
         
         JPanel infoPane = new JPanel(new BorderLayout());
             infoPane.add(stepLabel, BorderLayout.WEST);
-            infoPane.add(infoLabel, BorderLayout.CENTER);
+            //infoPane.add(infoLabel, BorderLayout.CENTER);
             infoPane.add(clockLabel, BorderLayout.EAST);
             infoPane.add(weatherLabel, BorderLayout.NORTH);
+            infoPane.add(soundButton, BorderLayout.CENTER);
         
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
         pack();
         setVisible(true);
+    }
+    
+    public void startOrStop(ActionEvent e) {
+        if (playingSound){
+            musicOrganizer.stopPlaying();
+            playingSound = false;
+        }
+        else{
+            musicOrganizer.playTrack(rand.nextInt(musicOrganizer.getNumberOfTracks()));
+            playingSound = true;
+        }
     }
     
     /**
