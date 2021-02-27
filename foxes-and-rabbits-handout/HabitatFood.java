@@ -17,6 +17,9 @@ public abstract class HabitatFood
     
     //counts the amount of each food within the field
     int counter = 0;
+    
+    //diseased/poisonous food lmao
+    private boolean hasDisease;
     /**
      * An example of a method - replace this comment with your own
      *
@@ -28,7 +31,27 @@ public abstract class HabitatFood
         alive = true;
         this.field = field;
         setLocation(location);
+        hasDisease = generateDisease();
     }
+    
+    /**
+     * randomly generate if the food is diseased
+     */
+    public boolean generateDisease() {
+        if(Math.random() > 0.5) {
+            hasDisease  = true;}
+        else {hasDisease = false;}
+        return hasDisease;
+    }
+    
+    /**
+     * returns if the food has disease
+     */
+    protected boolean hasDisease() {
+        return hasDisease;
+    }
+    
+    
     
     protected Location getLocation()
     {

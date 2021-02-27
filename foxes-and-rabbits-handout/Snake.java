@@ -5,7 +5,7 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Snake extends Animal 
+public class Snake extends Animal
 {
 
     private static final int BREEDING_AGE = 10;
@@ -41,12 +41,12 @@ public class Snake extends Animal
             foodLevel = RABBIT_FOOD_VALUE;
         }
     }
-    
+
     /**
-     * The snake's behaviour, which changes whether 
-     * it is day time or not. During the night it sleeps 
+     * The snake's behaviour, which changes whether
+     * it is day time or not. During the night it sleeps
      * and during the day it might breed, die of hunger,
-     * or die of old age. 
+     * or die of old age.
      * @param field The field currently occupied.
      * @param newSnakes A list to return newly born foxes.
      */
@@ -56,10 +56,10 @@ public class Snake extends Animal
             incrementAge();
             incrementHunger();
             if(isAlive()) {
-                giveBirth(newSnakes);            
+                giveBirth(newSnakes);
                 // Move towards a source of food if found.
                 Location newLocation = findFood();
-                if(newLocation == null) { 
+                if(newLocation == null) {
                     // No food found - try to move to a free location.
                     newLocation = getField().freeAdjacentLocation(getLocation());
                 }
@@ -76,7 +76,13 @@ public class Snake extends Animal
         else {
             //sleep
         }
+
         foodLevel = halfFoodLevel(foodLevel);
+
+        if (hasDisease()) {
+            HPLoss(20);
+        }
+
     }
 
     /**
@@ -116,9 +122,12 @@ public class Snake extends Animal
             Object animal = field.getObjectAt(where);
             if(animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
-                if(rabbit.isAlive()) { 
+                if(rabbit.isAlive()) {
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
+                    if (rabbit.hasDisease()) {
+                        becomesDiseased();
+                    }
                     return where;
                 }
             }
@@ -166,7 +175,7 @@ public class Snake extends Animal
     {
         return age >= BREEDING_AGE;
     }
-    
+
     /**
      * returns if an animal has found a mate to breed with, y'know, since we have sex now
      */
@@ -181,7 +190,7 @@ public class Snake extends Animal
             Object adjacentOjbect = field.getObjectAt(where);
             if(adjacentOjbect instanceof Snake) {
                 Snake mate = (Snake) adjacentOjbect;
-                if(mate.getSex().equals(sex)) { 
+                if(mate.getSex().equals(sex)) {
                     return false;
                 }
                 else {
