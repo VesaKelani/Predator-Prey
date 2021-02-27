@@ -24,9 +24,9 @@ public class MusicOrganizer
         player = new MusicPlayer();
         reader = new TrackReader();
         readLibrary("../foxes-and-rabbits-handout/audio");
-        System.out.println("Music library loaded. " + getNumberOfTracks() + " tracks.");
-        listAllTracks();
-        System.out.println();
+        //System.out.println("Music library loaded. " + getNumberOfTracks() + " tracks.");
+        //listAllTracks();
+        //System.out.println();
     }
     
     /**
@@ -57,8 +57,8 @@ public class MusicOrganizer
             player.stop();
             Track track = tracks.get(index);
             player.startPlaying(track.getFilename());
-            String str = "Now playing: " + track.getFilename();
-            System.out.println(str);
+            //String str = "Now playing: " + track.getFilename();
+            //System.out.println(str);
             track.incrementPlayCount();
         }
     }
