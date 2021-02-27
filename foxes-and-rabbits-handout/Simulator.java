@@ -124,6 +124,7 @@ public class Simulator
         Time.timeTick();
         //Change weather if necessary.
         WeatherState.changeWeather();
+        
     
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();

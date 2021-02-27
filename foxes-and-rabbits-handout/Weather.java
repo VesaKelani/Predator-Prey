@@ -33,7 +33,7 @@ public class Weather
     
     public void weatherChange()
     {
-        if (Time.getHours() == 7 && Time.getMinutes() == 0) {
+        if (Time.getHours() == 6 && Time.getMinutes() == 0) {
             currentWeather = randomWeather();
         }
     }
