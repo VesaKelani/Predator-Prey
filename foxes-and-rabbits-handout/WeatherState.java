@@ -8,23 +8,17 @@
 public class WeatherState
 {
     private static Weather weatherState = new Weather();
-    private static String currentWeather = "Sun";
     
-    public static String getRandWeatherState()
+    public static void changeWeather()
     {
-        currentWeather = weatherState.randomWeather();
-        return currentWeather;
+        weatherState.weatherChange();
     }
     
     public static String getCurrentWeather()
     {
-        return currentWeather;
+        return weatherState.getCurrentWeather();
+
     }
     
-    public static void weatherChange()
-    {
-        if (Time.getHours() == 7 && Time.getMinutes() == 0) {
-            currentWeather = getRandWeatherState();
-        }
-    }
+
 }

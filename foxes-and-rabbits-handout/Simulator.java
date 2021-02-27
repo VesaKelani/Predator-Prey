@@ -88,7 +88,6 @@ public class Simulator
 
         // Setup a valid starting point.
         reset();
-        WeatherState.weatherChange();
     }
 
     /**
@@ -124,7 +123,7 @@ public class Simulator
         //Increment time.
         Time.timeTick();
         //Change weather if necessary.
-        WeatherState.weatherChange();
+        WeatherState.changeWeather();
     
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();
