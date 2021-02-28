@@ -137,6 +137,7 @@ public class Simulator
                 it.remove();
             }
         }
+        //Let all the habitat food act.
         for(Iterator<HabitatFood> it = habitatfood.iterator(); it.hasNext(); ) {
             HabitatFood food = it.next();
             food.act(newPlants);
@@ -145,7 +146,7 @@ public class Simulator
             }
         }
 
-        // Add the newly born foxes and rabbits to the main lists.
+        // Add the newly born animals and habitat foods to the field.
         animals.addAll(newAnimals);
         habitatfood.addAll(newPlants);
 

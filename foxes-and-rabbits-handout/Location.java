@@ -56,6 +56,7 @@ public class Location
     }
     
     /**
+     * Return the row/
      * @return The row.
      */
     public int getRow()
@@ -64,6 +65,7 @@ public class Location
     }
     
     /**
+     * Return the column.
      * @return The column.
      */
     public int getCol()

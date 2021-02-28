@@ -29,6 +29,7 @@ public class FieldStats
 
     /**
      * Get details of what is in the field.
+     * @param field The field in question.
      * @return A string describing what is in the field.
      */
     public String getPopulationDetails(Field field)
@@ -126,7 +127,4 @@ public class FieldStats
         }
         countsValid = true;
     }
-    
-    
-    
 }

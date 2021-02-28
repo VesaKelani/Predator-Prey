@@ -84,6 +84,11 @@ public class SimulatorView extends JFrame
         setVisible(true);
     }
     
+    /**
+     * Stop/start playing sounds depending on whether
+     * any currently playing when the button is clicked.
+     * @param Action Event 
+     */
     public void startOrStop(ActionEvent e) {
         if (playingSound){
             musicOrganizer.stopPlaying();
@@ -107,6 +112,7 @@ public class SimulatorView extends JFrame
 
     /**
      * Display a short information label at the top of the window.
+     * @param text The text to be shown.
      */
     public void setInfoText(String text)
     {
@@ -197,6 +203,8 @@ public class SimulatorView extends JFrame
 
         /**
          * Create a new FieldView component.
+         * @param height The height.
+         * @param width The width.
          */
         public FieldView(int height, int width)
         {
@@ -207,6 +215,7 @@ public class SimulatorView extends JFrame
 
         /**
          * Tell the GUI manager how big we would like to be.
+         * @return The dimension preferred.
          */
         public Dimension getPreferredSize()
         {
@@ -238,6 +247,9 @@ public class SimulatorView extends JFrame
         
         /**
          * Paint on grid location on this field in a given color.
+         * @param x The column value.
+         * @param y The row value.
+         * @param color The colour to paint the location
          */
         public void drawMark(int x, int y, Color color)
         {
@@ -248,6 +260,7 @@ public class SimulatorView extends JFrame
         /**
          * The field view component needs to be redisplayed. Copy the
          * internal image to screen.
+         * @param g Graphic to be copied.
          */
         public void paintComponent(Graphics g)
         {
