@@ -3,7 +3,7 @@ import java.util.List;
 /**
  * A class representing shared characteristics of animals.
  *
- * @author David J. Barnes and Michael Kölling
+ * @author David J. Barnes, Michael Kölling, Sumaiya Mohbubul and Vesa Kelani.
  * @version 2016.02.29 (2)
  */
 public abstract class Animal
@@ -40,30 +40,33 @@ public abstract class Animal
     }
     
     /**
-     * animal becomes diseased
+     * Returns that an animal has become diseased.
+     * @returns Animal has become diseased.
      */
     protected boolean becomesDiseased() {
         return hasDisease = true;
     }
     
     /**
-     * decrease HP by a given number
+     * Decrease HP by a given number
+     * @param Amount of HP to lose.
+     * @returns Decrease HP by a given number.
      */
     protected int HPLoss(int loss) {
         return HP -= loss;
     }
     
-    
-    
     /**
-     * returns if the food has disease
+     * Returns if the animal is diseased.
+     * @returns If the animal is diseased.
      */
     protected boolean hasDisease() {
         return hasDisease;
     }
 
     /**
-     * random sex
+     * Assigns random sex.
+     * @returns Random sex.
      */
     public String generateSex() {
         if(Math.random() > 0.5) {
@@ -73,8 +76,8 @@ public abstract class Animal
     }
 
     /**
-     * Increase the age.
-     * Returns the animals Sex
+     * Returns the animals sex.
+     * @returns the animals sex.
      */
     public String getSex()
     {
@@ -152,11 +155,20 @@ public abstract class Animal
       return Time.getIsDay();
     }
     
+    /**
+     * Return the current weather.
+     * @return The current weather.
+     */
     protected String currentWeather()
     {
         return WeatherState.getCurrentWeather();
     }
     
+    /**
+     * Reduces the food level by half if it is Sunny.
+     * @param current food level of animal.
+     * @returns The animals food level.
+     */   
     protected int halfFoodLevel(int foodLevel)
     {
         if (WeatherState.getCurrentWeather() == "Sun"){

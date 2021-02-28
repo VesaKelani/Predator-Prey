@@ -2,21 +2,21 @@ import java.util.List;
 import java.util.*;
 
 /**
- * A simple model of a rabbit.
- * Rabbits age, move, breed, and die.
+ * A simple model of a Mouse.
+ * Mice age, move, eat flowers, breed, and die.
  *
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author David J. Barnes, Michael Kölling, Sumaiya Mohbubul and Vesa Kelani
+ * @version 27.02.2021
  */
-public class Rabbit extends Animal
+public class Mouse extends Animal
 {
-    // Characteristics shared by all rabbits (class variables).
+    // Characteristics shared by all mice (class variables).
 
-    // The age at which a rabbit can start to breed.
+    // The age at which a souse can start to breed.
     private static final int BREEDING_AGE = 5;
-    // The age to which a rabbit can live.
+    // The age to which a mouse can live.
     private static final int MAX_AGE = 30;
-    // The likelihood of a rabbit breeding.
+    // The likelihood of a mouse breeding.
     private static final double BREEDING_PROBABILITY = 0.12;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
@@ -24,19 +24,19 @@ public class Rabbit extends Animal
     private static final Random rand = Randomizer.getRandom();
     // Individual characteristics (instance fields).
 
-    // The rabbit's age.
+    // The mouse's age.
     private int age;
 
 
     /**
-     * Create a new rabbit. A rabbit may be created with age
+     * Create a new mouse. A mouse may be created with age
      * zero (a new born) or with a random age.
      *
-     * @param randomAge If true, the rabbit will have a random age.
+     * @param randomAge If true, the mouse will have a random age.
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Rabbit(boolean randomAge, Field field, Location location)
+    public Mouse(boolean randomAge, Field field, Location location)
     {
         super(field, location);
         age = 0;
@@ -47,18 +47,19 @@ public class Rabbit extends Animal
     }
 
     /**
-     * The rabbit's behaviour, which changes whether
+     * The mice behaviour, which changes whether
      * it is day time or not. During the night it sleeps
      * and during the day it might breed,
      * or die of old age.
-     * @param newRabbits A list to return newly born rabbits.
+     * If a mouse has been infected with a disease, it will lose health.
+     * @param newMice A list to return newly born mice.
      */
-    public void act(List<Animal> newRabbits)
+    public void act(List<Animal> newMice)
     {
         if (isDay()) {
             incrementAge();
             if(isAlive()) {
-                giveBirth(newRabbits);
+                giveBirth(newMice);
                 // Try to move into a free location.
                 Location newLocation = getField().freeAdjacentLocation(getLocation());
                 if(newLocation != null) {
@@ -81,7 +82,7 @@ public class Rabbit extends Animal
 
     /**
      * Increase the age.
-     * This could result in the rabbit's death.
+     * This could result in the Mouse's death.
      */
     private void incrementAge()
     {
@@ -92,21 +93,21 @@ public class Rabbit extends Animal
     }
 
     /**
-     * Check whether or not this rabbit is to give birth at this step.
+     * Check whether or not this mouse is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newRabbits A list to return newly born rabbits.
+     * @param newMice A list to return newly born mice.
      */
-    private void giveBirth(List<Animal> newRabbits)
+    private void giveBirth(List<Animal> newMice)
     {
-        // New rabbits are born into adjacent locations.
+        // New mice are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Rabbit young = new Rabbit(false, field, loc);
-            newRabbits.add(young);
+            Mouse young = new Mouse(false, field, loc);
+            newMice.add(young);
         }
     }
 
@@ -123,7 +124,13 @@ public class Rabbit extends Animal
         }
         return births;
     }
-
+    
+    /**
+     * Look for flowers adjacent to the current location.
+     * Only the first live flower is eaten.
+     * if the flower has a disease, this is passed to the mouse.
+     * @return Where food was found, or null if it wasn't.
+     */
     private Location findFood()
     {
         Field field = getField();
@@ -149,8 +156,8 @@ public class Rabbit extends Animal
     
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
+     * A mouse can breed if it has reached the breeding age.
+     * @return true if the mouse can breed, false otherwise.
      */
     private boolean canBreed()
     {
@@ -158,7 +165,8 @@ public class Rabbit extends Animal
     }
 
     /**
-     * returns if an animal has found a mate to breed with, y'know, since we have sex now
+     * Returns if a mouse has found a mate to breed with.
+     * @returns true if the sex of two mice are different, false otherwise.
      */
     private boolean foundMate() {
 
@@ -169,8 +177,8 @@ public class Rabbit extends Animal
         while(it.hasNext()) {
             Location where = it.next();
             Object adjacentOjbect = field.getObjectAt(where);
-            if(adjacentOjbect instanceof Rabbit) {
-                Rabbit mate = (Rabbit) adjacentOjbect;
+            if(adjacentOjbect instanceof Mouse) {
+                Mouse mate = (Mouse) adjacentOjbect;
                 if(mate.getSex().equals(sex)) {
                     return false;
                 }

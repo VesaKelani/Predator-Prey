@@ -6,8 +6,8 @@ import java.util.Random;
  * A simple model of a bat.
  * Bats age, move, eat insects, and die.
 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author David J. Barnes, Michael Kölling, Sumaiya Mohbubul and Vesa Kelani.
+ * @version 27.02.2021
  */
 public class Bat extends Animal
 {
@@ -58,8 +58,7 @@ public class Bat extends Animal
      * it is day time or not. During the day it sleeps
      * and during the night it might breed, die of hunger,
      * or die of old age.
-     *
-     * @param field The field currently occupied.
+     * If a bat has been infected with a disease, it will lose health.
      * @param newBats A list to return newly born bats.
      */
     public void act(List<Animal> newBats)
@@ -109,6 +108,12 @@ public class Bat extends Animal
         }
     }
 
+    /**
+     * Look for insects adjacent to the current location.
+     * Only the first live insect is eaten.
+     * if the insect has a disease, this is passed to the bat.
+     * @return Where food was found, or null if it wasn't.
+     */
     private Location findFood()
     {
         Field field = getField();
@@ -167,7 +172,7 @@ public class Bat extends Animal
 
     /**
      * A bat can breed if it has reached the breeding age.
-     * @return If it can breen or not.
+     @return true if the bat can breed, false otherwise.
      */
     public boolean canBreed()
     {
@@ -175,7 +180,8 @@ public class Bat extends Animal
     }
 
     /**
-     * returns if an animal has found a mate to breed with, y'know, since we have sex now
+     * Returns if a bat has found a mate to breed with.
+     * @returns true if the sex of two bats are different, false otherwise.
      */
     private boolean foundMate() {
 
