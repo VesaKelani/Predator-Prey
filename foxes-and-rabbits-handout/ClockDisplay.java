@@ -32,6 +32,8 @@ public class ClockDisplay
      * Constructor for ClockDisplay objects. This constructor
      * creates a new clock set at the time specified by the 
      * parameters.
+     * @param hour The hour.
+     * @param minute The minute.
      */
     public ClockDisplay(int hour, int minute)
     {
@@ -56,6 +58,8 @@ public class ClockDisplay
     /**
      * Set the time of the display to the specified hour and
      * minute.
+     * @param hour The hour.
+     * @param minute The minute.
      */
     public void setTime(int hour, int minute)
     {
@@ -92,11 +96,19 @@ public class ClockDisplay
         return hours.getValue() > 7 && hours.getValue() < 18;
     }
 
+    /**
+     * Return the value of hours.
+     * @return hour.
+     */
     public int getHours()
     {
         return hours.getValue();
     }
     
+    /**
+     * Return the value of minutes.
+     * @return minutes.
+     */
     public int getMinutes()
     {
         return minutes.getValue();

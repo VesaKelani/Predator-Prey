@@ -98,7 +98,7 @@ public class Bat extends Animal
         }
     }
 
-        /**
+    /**
      * Make this bat more hungry. This could result in the bat's death.
      */
     private void incrementHunger()

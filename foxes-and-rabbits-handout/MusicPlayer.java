@@ -76,6 +76,9 @@ public class MusicPlayer
         }
     }
     
+    /**
+     * Stop sound playing by terminating the player.
+     */
     public void stop()
     {
         killPlayer();
@@ -146,5 +149,4 @@ public class MusicPlayer
     {
         System.out.println("There was a problem playing: " + filename);
     }
-
 }
