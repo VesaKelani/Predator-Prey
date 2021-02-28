@@ -7,7 +7,8 @@ import java.awt.Color;
 /**
  * test*******************
  * A simple predator-prey simulator, based on a rectangular field
- * containing rabbits and foxes.
+ * containing lots of animals and plants such as hyneas, bats, 
+ * and flowers.
  *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
@@ -19,21 +20,21 @@ public class Simulator
     private static final int DEFAULT_WIDTH = 100;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 100;
-    // The probability that a fox will be created in any given grid position.
+    // The probability that a hyena will be created in any given grid position.
     private static final double HYENA_CREATION_PROBABILITY = 0.02;
-    // The probability that a rabbit will be created in any given grid position.
+    // The probability that a mouse will be created in any given grid position.
     private static final double MOUSE_CREATION_PROBABILITY = 0.05;
     // The probability that a snake will be created in any given grid position.
     private static final double SNAKE_CREATION_PROBABILITY = 0.02;
-
+    // The probability that a flower will be created in any given grid position.
     private static final double FLOWER_CREATION_PROBABILITY = 0.02;
-
+    // The probability that a grass will be created in any given grid position.
     private static final double GRASS_CREATION_PROBABILITY = 0.07;
-
+    // The probability that a bat will be created in any given grid position.
     private static final double BAT_CREATION_PROBABILITY = 0.03;
-
+    // The probability that a falcon will be created in any given grid position.
     private static final double FALCON_CREATION_PROBABILITY = 0.03;
-
+    // The probability that an insect will be created in any given grid position.
     private static final double INSECT_CREATION_PROBABILITY = 0.01;
 
 
@@ -115,7 +116,7 @@ public class Simulator
     /**
      * Run the simulation from its current state for a single step.
      * Iterate over the whole field updating the state of each
-     * fox and rabbit.
+     * animal and habitat food.
      */
     public void simulateOneStep()
     {
@@ -129,7 +130,7 @@ public class Simulator
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();
         List<HabitatFood> newPlants = new ArrayList<>();
-        // Let all rabbits act.
+        // Let all animals act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
             animal.act(newAnimals);
