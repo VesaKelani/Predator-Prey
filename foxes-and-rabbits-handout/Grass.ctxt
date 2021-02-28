@@ -1,18 +1,19 @@
 #BlueJ class context
 comment0.target=Grass
-comment0.text=\n\ Write\ a\ description\ of\ class\ Grass\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.text=\r\n\ A\ simple\ model\ of\ Grass.\r\n\ Grass\ does\ not\ move,\ it\ simply\ exists.\r\n\ New\ Grass\ can\ grow.\r\n\r\n\ @author\ Sumaiya\ Mohbubul\r\n\ @version\ 27.02.2021\r\n
 comment1.params=randomAge\ field\ location
 comment1.target=Grass(boolean,\ Field,\ Location)
-comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Grass\n
+comment1.text=\r\n\ Create\ a\ new\ grass.\ Grass\ may\ be\ created\ with\ age\ so\ that\ it\ can\ wither\r\n\ zero\ (a\ new\ born)\ or\ with\ a\ random\ age.\r\n\r\n\ @param\ randomAge\ If\ true,\ the\ grass\ will\ have\ a\ random\ age.\r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n
 comment2.params=
 comment2.target=void\ incrementAge()
-comment2.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\n\ @param\ \ y\ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ the\ sum\ of\ x\ and\ y\n
+comment2.text=\r\n\ Increase\ the\ age.\r\n\ This\ could\ result\ in\ the\ grass'\ death.\r\n
 comment3.params=newGrass
 comment3.target=void\ act(java.util.List)
+comment3.text=\r\n\ Inherited\ from\ the\ abstract\ habitatFood\ class.\r\n
 comment4.params=
 comment4.target=int\ grow()
-comment4.text=\ \n\ generate\ number\ of\ grass\ to\ grow\n
+comment4.text=\ \r\n\ Generate\ number\ of\ grass\ to\ grow.\r\n\ @return\ The\ number\ of\ grass\ to\ grow.\r\n
 comment5.params=newGrass
 comment5.target=void\ growNewGrass(java.util.List)
-comment5.text=\n\ grow\ new\ grass\ in\ random\ free\ locations\n
+comment5.text=\r\n\ Grow\ new\ grass\ in\ random\ free\ locations.\r\n\ @param\ List\ of\ new\ grass\ to\ grow.\r\n
 numComments=6

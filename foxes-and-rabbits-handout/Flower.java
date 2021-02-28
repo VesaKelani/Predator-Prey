@@ -1,9 +1,10 @@
 import java.util.*;
 /**
- * Write a description of class Flower here.
+ * * A simple model of a flower.
+ * * Flowers age, grow, and multiply.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Sumaiya Mohbubul
+ * @version 27.02.2021
  */
 public class Flower extends HabitatFood
 {
@@ -15,7 +16,12 @@ public class Flower extends HabitatFood
     //each specific flower age
     private int age;
     /**
-     * Constructor for objects of class Flower
+     * Create a new rabbit. An insect may be created with age
+     * zero (a new born) or with a random age.
+     * 
+     * @param randomAge If true, the rabbit will have a random age.
+     * @param field The field currently occupied.
+     * @param location The location within the field.
      */
     public Flower(boolean randomAge, Field field, Location location)
     {
@@ -27,7 +33,8 @@ public class Flower extends HabitatFood
     }
 
     /**
-     *increments the age of the flower
+     * Increase the age.
+     * This could result in the flower's death.
      */
     private void incrementAge()
     {
@@ -38,7 +45,8 @@ public class Flower extends HabitatFood
     }
     
     /**
-     *how the flower will act during the simulation
+     *The flower's behaviour.
+     ** @param newFlowers A list to return newly born flowers.
      */
     public void act(List<HabitatFood> newFlowers) {
         incrementAge(); 
@@ -48,7 +56,8 @@ public class Flower extends HabitatFood
     }
     
     /** 
-     * generate number of grass to grow
+     * Generate number of flowers to grow.
+     * @return The number of flowers to grow.
      */
     private int grow() {
         int baby = 0;
@@ -60,7 +69,8 @@ public class Flower extends HabitatFood
     }
     
     /**
-     * grow new flowers in random free locations
+     * Grow new flowers in random free locations.
+     * @param List of new flowers to grow.
      */
     private void growNewFlowers(List<HabitatFood> newFlowers) {
         int babyFlower = grow();
@@ -76,7 +86,8 @@ public class Flower extends HabitatFood
     }
     
     /**
-     * get total amount of flowers in the field
+     * The total amount of flowers in the field.
+     * @return Total amound of flowers.
      */ 
     public int getFlowerTotal() {
         Field field = getField();
@@ -84,7 +95,6 @@ public class Flower extends HabitatFood
         for(int i = 0; i < field.getDepth(); i++) {
             for(int j = 0; j < field.getWidth(); j++) {
                 if(field.getObjectAt(i, j) instanceof Flower) {
-                    
                     total += 1;
                 }
             }

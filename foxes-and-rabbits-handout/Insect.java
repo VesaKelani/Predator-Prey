@@ -1,22 +1,27 @@
 import java.util.*;
 /**
- * Write a description of class Insect here.
+ * * A simple model of an Insect.
+ * * Insects age, grow, and multiply.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Sumaiya Mohbubul
+ * @version 27.02.2021
  */
 public class Insect extends HabitatFood
 {
-    // instance variables - replace the example below with your own
+    // variables shared by all insects.
     private static final int MAX_AGE = 70;
     private static final Random rand = Randomizer.getRandom();
     private static final double GROW_PROBABILITY = 0.02;
     private static final int MAX_INSECT_GROWN = 1;
-    
-    
+    //each specific insect age.
     private int age;
     /**
-     * Constructor for objects of class Insect
+     * Create a new Insect. An insect may be created with age
+     * zero (a new born) or with a random age.
+     * 
+     * @param randomAge If true, the rabbiinsectt will have a random age.
+     * @param field The field currently occupied.
+     * @param location The location within the field.
      */
     public Insect(boolean randomAge, Field field, Location location)
     {
@@ -28,7 +33,8 @@ public class Insect extends HabitatFood
     }
 
     /**
-     *increments the age of the flower
+     * Increase the age.
+     * This could result in the insect's death.
      */
     private void incrementAge()
     {
@@ -39,7 +45,8 @@ public class Insect extends HabitatFood
     }
     
     /**
-     *how the flower will act during the simulation
+     *The insects's behaviour.
+     ** @param newInsects A list to return newly born flowers.
      */
     public void act(List<HabitatFood> newInsects)
     {
@@ -50,7 +57,8 @@ public class Insect extends HabitatFood
     }
     
     /** 
-     * generate number of grass to grow
+     * Generate number of insects to grow.
+     * @return The number of insects to grow.
      */
     private int grow() {
         int babyFood = 0;
@@ -62,7 +70,8 @@ public class Insect extends HabitatFood
     }
     
     /**
-     * grow new flowers in random free locations
+     * Grow new insects in random free locations.
+     * @param List of new insects to grow.
      */
     private void growNewInsects(List<HabitatFood> newInsects) {
         int babies = grow();
@@ -78,7 +87,8 @@ public class Insect extends HabitatFood
     }
     
     /**
-     * get total amount of flowers in the field
+     * The total amount of insects in the field.
+     * @return Total amound of insects.
      */ 
     public int getInsectTotal() {
         Field field = getField();
@@ -86,13 +96,11 @@ public class Insect extends HabitatFood
         for(int i = 0; i < field.getDepth(); i++) {
             for(int j = 0; j < field.getWidth(); j++) {
                 if(field.getObjectAt(i, j) instanceof Insect) {
-                    
                     total += 1;
                 }
             }
         }
         return total;
     }
-    
-    
+
 }

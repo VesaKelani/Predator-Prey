@@ -60,6 +60,7 @@ public class SimulatorView extends JFrame
         JButton soundButton = new JButton("Start/Stop");
         soundButton.addActionListener(this::startOrStop);
         
+        
         clockLabel = new JLabel(CLOCK_PREFIX, JLabel.CENTER);
         weatherLabel = new JLabel(WEATHER_PREFIX, JLabel.CENTER);
         
@@ -69,7 +70,7 @@ public class SimulatorView extends JFrame
 
         Container contents = getContentPane();
         
-        JPanel infoPane = new JPanel(new BorderLayout());
+        JPanel infoPane = new JPanel(new BorderLayout(5, 5));
             infoPane.add(stepLabel, BorderLayout.WEST);
             //infoPane.add(infoLabel, BorderLayout.CENTER);
             infoPane.add(clockLabel, BorderLayout.EAST);

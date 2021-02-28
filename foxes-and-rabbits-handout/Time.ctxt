@@ -1,12 +1,12 @@
 #BlueJ class context
 comment0.target=Time
-comment0.text=\n\ Time\ during\ the\ simulation.\n\n\ @Vesa\ Kelani\n\ @24/02/2020\n
+comment0.text=\r\n\ Time\ during\ the\ simulation.\r\n\r\n\ @Vesa\ Kelani\r\n\ @24/02/2020\r\n
 comment1.params=
 comment1.target=java.lang.String\ getDisplay()
-comment1.text=\n\ Get\ the\ display\ of\ the\ time.\n\ @return\ The\ time\ as\ a\ string.\n
+comment1.text=\r\n\ Get\ the\ display\ of\ the\ time.\r\n\ @return\ The\ time\ as\ a\ string.\r\n
 comment2.params=
 comment2.target=void\ timeTick()
-comment2.text=\n\ Tick\ the\ metaphorical\ clock.\n
+comment2.text=\r\n\ Tick\ the\ metaphorical\ clock.\r\n
 comment3.params=
 comment3.target=boolean\ getIsDay()
 comment3.text=\r\n\ Return\ whether\ it\ is\ daytime\ or\ not.\r\n\ @return\ Whether\ it\ is\ daytime\ or\ not.\r\n

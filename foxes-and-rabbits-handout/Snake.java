@@ -1,30 +1,31 @@
 import java.util.*;
 /**
- * Write a description of class Snake here.
+ * * A simple model of a snake animal.
+ * * Flowers age, grow, and multiply.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Vesa Kelani and Sumaiya Mohbubul
+ * @version 27.02.2021
  */
 public class Snake extends Animal
 {
 
     private static final int BREEDING_AGE = 10;
-    // The age to which a fox can live.
+    // The age to which a snake can live.
     private static final int MAX_AGE = 150;
-    // The likelihood of a fox breeding.
+    // The likelihood of a snake breeding.
     private static final double BREEDING_PROBABILITY = 0.2;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 10;
     // The food value of a single rabbit. In effect, this is the
-    // number of steps a fox can go before it has to eat again.
+    // number of steps a snake can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 15;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 
     // Individual characteristics (instance fields).
-    // The fox's age.
+    // The snake's age.
     private int age;
-    // The fox's food level, which is increased by eating rabbits.
+    // The snake's food level, which is increased by eating rabbits.
     private int foodLevel;
     /**
      * Constructor for objects of class Snake

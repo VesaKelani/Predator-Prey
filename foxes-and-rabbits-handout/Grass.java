@@ -1,21 +1,30 @@
 import java.util.*;
 /**
- * Write a description of class Grass here.
+ * A simple model of Grass.
+ * Grass does not move, it simply exists.
+ * New Grass can grow.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Sumaiya Mohbubul
+ * @version 27.02.2021
  */
 public class Grass extends HabitatFood
 {
+    // variables shared by all grass.
     private static final int MAX_AGE = 20;
     private static final double GROW_PROBABILITY = 0.04;
     private static final int MAX_GRASS_GROWN = 1;
+    //each specific flower age.
     private int age;
     private static final Random rand = Randomizer.getRandom();
     private int totalGrass = 0;
 
     /**
-     * Constructor for objects of class Grass
+     * Create a new grass. Grass may be created with age so that it can wither
+     * zero (a new born) or with a random age.
+     *
+     * @param randomAge If true, the grass will have a random age.
+     * @param field The field currently occupied.
+     * @param location The location within the field.
      */
     public Grass(boolean randomAge, Field field, Location location)
     {
@@ -27,10 +36,8 @@ public class Grass extends HabitatFood
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Increase the age.
+     * This could result in the grass' death.
      */
     private void incrementAge()
     {
@@ -40,17 +47,14 @@ public class Grass extends HabitatFood
         }
     }
     
-    public void act(List<HabitatFood> newGrass)
-    {
-     //incrementAge(); 
-     //String details = stats.generateCounts(field);
-        // if(isAlive() && totalGrass < 50) {
-            // growNewGrass(newGrass);
-        // }   
-    }
+    /**
+     * Inherited from the abstract habitatFood class.
+     */
+    public void act(List<HabitatFood> newGrass){}
     
     /** 
-     * generate number of grass to grow
+     * Generate number of grass to grow.
+     * @return The number of grass to grow.
      */
     private int grow() {
         int babyGrass = 0;
@@ -63,7 +67,8 @@ public class Grass extends HabitatFood
     }
     
     /**
-     * grow new grass in random free locations
+     * Grow new grass in random free locations.
+     * @param List of new grass to grow.
      */
     private void growNewGrass(List<HabitatFood> newGrass) {
         Field field = getField();
