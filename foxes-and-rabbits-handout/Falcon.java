@@ -4,15 +4,14 @@ import java.util.Random;
 
 /**
  * A simple model of a falcon.
- * Falcons age, move, eat rabbits, and die.
+ * Falcons age, move, eat mouses or snakes, and die.
  *
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author David J. Barnes, Michael Kölling, Sumaiya Mohbubul and Vesa Kelani.
+ * @version 27.02.2021
  */
 public class Falcon extends Animal
 {
     // Characteristics shared by all falcons (class variables).
-
     // The age at which a falcon can start to breed.
     private static final int BREEDING_AGE = 2;
     // The age to which a falcon can live.
@@ -21,9 +20,9 @@ public class Falcon extends Animal
     private static final double BREEDING_PROBABILITY = 0.04;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
-    // The food value of a single rabbit. In effect, this is the
+    // The food value of a single mouse. In effect, this is the
     // number of steps a falcon can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 20;
+    private static final int MOUSE_FOOD_VALUE = 20;
     private static final int SNAKE_FOOD_VALUE = 20;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
@@ -31,9 +30,8 @@ public class Falcon extends Animal
     // Individual characteristics (instance fields).
     // The falcon's age.
     private int age;
-    // The falcon's food level, which is increased by eating rabbits and snakes.
+    // The falcon's food level, which is increased by eating mouses and snakes.
     private int foodLevel;
-
     /**
      * Create a falcon. A falcon can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
@@ -47,11 +45,11 @@ public class Falcon extends Animal
         super(field, location);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt((RABBIT_FOOD_VALUE) + rand.nextInt(SNAKE_FOOD_VALUE));
+            foodLevel = rand.nextInt((MOUSE_FOOD_VALUE) + rand.nextInt(SNAKE_FOOD_VALUE));
         }
         else {
             age = 0;
-            foodLevel = RABBIT_FOOD_VALUE + SNAKE_FOOD_VALUE;
+            foodLevel = MOUSE_FOOD_VALUE + SNAKE_FOOD_VALUE;
         }
     }
 
@@ -60,7 +58,7 @@ public class Falcon extends Animal
      * it is day time or not. During the night it sleeps
      * and during the day it might breed, die of hunger,
      * or die of old age.
-     * @param field The field currently occupied.
+     * If a falcon has been infected with a disease, it will lose health.
      * @param newFalcons A list to return newly born falcons.
      */
     public void act(List<Animal> newFalcons)
@@ -118,8 +116,9 @@ public class Falcon extends Animal
     }
 
     /**
-     * Look for rabbits adjacent to the current location.
-     * Only the first live rabbit is eaten.
+     * Look for mouses and snakes adjacent to the current location.
+     * Only the first live mouse or snake is eaten.
+     * * if the mouse or snake has a disease, this is passed to the falcon.
      * @return Where food was found, or null if it wasn't.
      */
     private Location findFood()
@@ -130,13 +129,13 @@ public class Falcon extends Animal
         while(it.hasNext()) {
             Location where = it.next();
             Object animal = field.getObjectAt(where);
-            if(animal instanceof Rabbit) {
-                Rabbit rabbit = (Rabbit) animal;
+            if(animal instanceof Mouse) {
+                Mouse mouse = (Mouse) animal;
 
-                if(rabbit.isAlive()) {
-                    rabbit.setDead();
-                    foodLevel = RABBIT_FOOD_VALUE;
-                    if (rabbit.hasDisease()) {
+                if(mouse.isAlive()) {
+                    mouse.setDead();
+                    foodLevel = MOUSE_FOOD_VALUE;
+                    if (mouse.hasDisease()) {
                         becomesDiseased();
                     }
                     return where;
@@ -192,6 +191,7 @@ public class Falcon extends Animal
 
     /**
      * A falcon can breed if it has reached the breeding age.
+     * @return true if the falcon can breed, false otherwise.
      */
     public boolean canBreed()
     {
@@ -199,7 +199,8 @@ public class Falcon extends Animal
     }
 
     /**
-     * returns if an animal has found a mate to breed with, y'know, since we have sex now
+     * Returns if a falcon has found a mate to breed with.
+     * @returns true if the sex of two falcons are different, false otherwise.
      */
     private boolean foundMate() {
 
