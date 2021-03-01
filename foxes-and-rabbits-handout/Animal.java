@@ -53,7 +53,11 @@ public abstract class Animal
      * @returns Decrease HP by a given number.
      */
     protected int HPLoss(int loss) {
-        return HP -= loss;
+        HP -= 20;
+        if (HP ==0) {
+            setDead();
+        }
+        return HP;
     }
     
     /**

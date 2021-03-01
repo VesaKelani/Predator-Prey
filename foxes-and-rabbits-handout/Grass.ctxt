@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Grass
-comment0.text=\r\n\ A\ simple\ model\ of\ Grass.\r\n\ Grass\ does\ not\ move,\ it\ simply\ exists.\r\n\ New\ Grass\ can\ grow.\r\n\r\n\ @author\ Sumaiya\ Mohbubul\r\n\ @version\ 27.02.2021\r\n
+comment0.text=\r\n\ A\ simple\ model\ of\ Grass.\r\n\ Grass\ simply\ exists\ and\ does\ not\ interact\ with\ other\ objects.\r\n\ New\ Grass\ can\ grow\ and\ die.\r\n\r\n\ @author\ Sumaiya\ Mohbubul\r\n\ @version\ 27.02.2021\r\n
 comment1.params=randomAge\ field\ location
 comment1.target=Grass(boolean,\ Field,\ Location)
 comment1.text=\r\n\ Create\ a\ new\ grass.\ Grass\ may\ be\ created\ with\ age\ so\ that\ it\ can\ wither\r\n\ zero\ (a\ new\ born)\ or\ with\ a\ random\ age.\r\n\r\n\ @param\ randomAge\ If\ true,\ the\ grass\ will\ have\ a\ random\ age.\r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n

@@ -1,8 +1,8 @@
 import java.util.*;
 /**
  * A simple model of Grass.
- * Grass does not move, it simply exists.
- * New Grass can grow.
+ * Grass simply exists and does not interact with other objects.
+ * New Grass can grow and die.
  *
  * @author Sumaiya Mohbubul
  * @version 27.02.2021
