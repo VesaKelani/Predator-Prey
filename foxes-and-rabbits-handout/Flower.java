@@ -12,6 +12,7 @@ public class Flower extends HabitatFood
     private static final int MAX_AGE = 50;
     private static final Random rand = Randomizer.getRandom();
     private static final double GROW_PROBABILITY = 0.02;
+    private static final double DEATH_PROBABILITY = 0.018;
     private static final int MAX_FLOWER_GROWN = 1;
     //each specific flower age
     private int age;
@@ -43,18 +44,23 @@ public class Flower extends HabitatFood
             setDead();
         }
     }
-    
+
     /**
      *The flower's behaviour.
      ** @param newFlowers A list to return newly born flowers.
      */
     public void act(List<HabitatFood> newFlowers) {
         incrementAge(); 
-        if(isAlive()) {
+        if(isAlive() && WeatherState.getCurrentWeather() != "Rain") {
             growNewFlowers(newFlowers);
         } 
+        else {
+            if (rand.nextDouble() <= DEATH_PROBABILITY) {
+                setDead();
+            }
+        }
     }
-    
+
     /** 
      * Generate number of flowers to grow.
      * @return The number of flowers to grow.
@@ -67,7 +73,7 @@ public class Flower extends HabitatFood
         }
         return baby;
     }
-    
+
     /**
      * Grow new flowers in random free locations.
      * @param List of new flowers to grow.
@@ -84,7 +90,7 @@ public class Flower extends HabitatFood
         }
 
     }
-    
+
     /**
      * The total amount of flowers in the field.
      * @return Total amound of flowers.
@@ -101,5 +107,5 @@ public class Flower extends HabitatFood
         }
         return total;
     }
-    
+
 }

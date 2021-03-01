@@ -83,13 +83,10 @@ public class Snake extends Animal
         else {
             //sleep
         }
-
         foodLevel = halfFoodLevel(foodLevel);
-
         if (hasDisease()) {
             HPLoss(20);
         }
-
     }
 
     /**
