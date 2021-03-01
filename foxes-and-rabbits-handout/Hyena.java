@@ -3,8 +3,8 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- * A simple model of a fox.
- * Foxes age, move, eat mice, and die.
+ * A simple model of a Hyena.
+ * Hyena's age, move, eat mice, and die.
  *
  * @author David J. Barnes, Michael Kölling, Sumaiya Mohbubul and Vesa Kelani.
  * @version 27.02.2021
