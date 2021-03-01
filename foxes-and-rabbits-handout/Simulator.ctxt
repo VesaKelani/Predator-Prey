@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Simulator
-comment0.text=\r\n\ test*******************\r\n\ A\ simple\ predator-prey\ simulator,\ based\ on\ a\ rectangular\ field\r\n\ containing\ rabbits\ and\ foxes.\r\n\r\n\ @author\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling\r\n\ @version\ 2016.02.29\ (2)\r\n
+comment0.text=\r\n\ test*******************\r\n\ A\ simple\ predator-prey\ simulator,\ based\ on\ a\ rectangular\ field\r\n\ containing\ lots\ of\ animals\ and\ plants\ such\ as\ hyneas,\ bats,\ \r\n\ and\ flowers.\r\n\r\n\ @author\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling\r\n\ @version\ 2016.02.29\ (2)\r\n
 comment1.params=
 comment1.target=Simulator()
 comment1.text=\r\n\ Construct\ a\ simulation\ field\ with\ default\ size.\r\n
@@ -15,7 +15,7 @@ comment4.target=void\ simulate(int)
 comment4.text=\r\n\ Run\ the\ simulation\ from\ its\ current\ state\ for\ the\ given\ number\ of\ steps.\r\n\ Stop\ before\ the\ given\ number\ of\ steps\ if\ it\ ceases\ to\ be\ viable.\r\n\ @param\ numSteps\ The\ number\ of\ steps\ to\ run\ for.\r\n
 comment5.params=
 comment5.target=void\ simulateOneStep()
-comment5.text=\r\n\ Run\ the\ simulation\ from\ its\ current\ state\ for\ a\ single\ step.\r\n\ Iterate\ over\ the\ whole\ field\ updating\ the\ state\ of\ each\r\n\ fox\ and\ rabbit.\r\n
+comment5.text=\r\n\ Run\ the\ simulation\ from\ its\ current\ state\ for\ a\ single\ step.\r\n\ Iterate\ over\ the\ whole\ field\ updating\ the\ state\ of\ each\r\n\ animal\ and\ habitat\ food.\r\n
 comment6.params=
 comment6.target=int\ getSteps()
 comment6.text=\r\n\ Return\ the\ total\ steps\ so\ far.\r\n\ @return\ The\ total\ steps.\r\n

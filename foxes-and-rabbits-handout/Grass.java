@@ -10,7 +10,7 @@ import java.util.*;
 public class Grass extends HabitatFood
 {
     // variables shared by all grass.
-    private static final int MAX_AGE = 20;
+    private static final int MAX_AGE = 60;
     private static final double GROW_PROBABILITY = 0.04;
     private static final int MAX_GRASS_GROWN = 1;
     //each specific flower age.
@@ -48,9 +48,15 @@ public class Grass extends HabitatFood
     }
     
     /**
-     * Inherited from the abstract habitatFood class.
+     *The grass' behaviour.
+     ** @param newGrass A list to return newly born grass.
      */
-    public void act(List<HabitatFood> newGrass){}
+    public void act(List<HabitatFood> newGrass){
+        incrementAge(); 
+        if(isAlive()) {
+            growNewGrass(newGrass);
+        } 
+    }
     
     /** 
      * Generate number of grass to grow.
@@ -58,10 +64,9 @@ public class Grass extends HabitatFood
      */
     private int grow() {
         int babyGrass = 0;
-        
-        if(rand.nextDouble() <= GROW_PROBABILITY) {
+        int grassTotal = getGrassTotal();
+        if(grassTotal <600 && rand.nextDouble() <= GROW_PROBABILITY) {
             babyGrass = rand.nextInt(MAX_GRASS_GROWN) + 1;
-            totalGrass += babyGrass;
         }
         return babyGrass;
     }
@@ -72,24 +77,32 @@ public class Grass extends HabitatFood
      */
     private void growNewGrass(List<HabitatFood> newGrass) {
         Field field = getField();
-        List<Location> free = new LinkedList<>();
+        List<Location> free = findFreelocations();
         int babyGrass = grow();
-        
-        for(int i = 0; i < field.getDepth(); i++) {
-            for(int j = 0; j < field.getWidth(); j++) {
-                if(field.getObjectAt(i, j) == null) {
-                    free.add(new Location(i, j));
-                }
-            }
-        }
-        Collections.shuffle(free);
-
         for (int i = 0; i < babyGrass && free.size() > 0; i++) {
             Location loc = free.remove(0);
             Grass baby= new Grass(false, field, loc);
             newGrass.add(baby);
+            counter += 1;
         }
 
+    }
+    
+    /**
+     * The total amount of grass in the field.
+     * @return Total amount of grass.
+     */ 
+    public int getGrassTotal() {
+        Field field = getField();
+        int total = 0;
+        for(int i = 0; i < field.getDepth(); i++) {
+            for(int j = 0; j < field.getWidth(); j++) {
+                if(field.getObjectAt(i, j) instanceof Grass) {
+                    total += 1;
+                }
+            }
+        }
+        return total;
     }
     
 }
