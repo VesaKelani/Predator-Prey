@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Actor
-comment0.text=\r\n\ A\ class\ representing\ the\ shared\ characteristics\ of\ all\ acting\ species.\r\n\r\n\ @Sumaiya\ Mohbubul\ and\ Vesa\ Kelani\r\n\ @03/03/2021\r\n
+comment0.text=\r\n\ A\ class\ representing\ the\ shared\ characteristics\ of\ all\ acting\ species.\r\n\r\n\ @author\ Sumaiya\ Mohbubul\ and\ Vesa\ Kelani\r\n\ @version\ 03/03/2021\r\n
 comment1.params=field\ location
 comment1.target=Actor(Field,\ Location)
 comment1.text=\r\n\ Create\ a\ new\ actor\ at\ location\ in\ field.\r\n\r\n\ @param\ field\ The\ field\ currently\ occupied.\r\n\ @param\ location\ The\ location\ within\ the\ field.\r\n

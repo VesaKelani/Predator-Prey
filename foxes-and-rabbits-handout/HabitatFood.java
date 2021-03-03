@@ -29,12 +29,7 @@ public abstract class HabitatFood extends Actor
      * @return If food will be diseased.
      */
     public boolean generateDisease() {
-        if(Math.random() > 0.65) {
-            hasDisease  = true;
-        }
-        else {
-            hasDisease = false;
-        }
+        hasDisease  = Math.random() > 0.65;
         return hasDisease;
     }
     
@@ -58,7 +53,7 @@ public abstract class HabitatFood extends Actor
      * find free locations within the field
      * @return all free locations found.
      */
-    protected List<Location> findFreelocations() {
+    protected List<Location> findFreeLocations() {
         Field field = getField();
         List<Location> free = new LinkedList<>();
         for(int i = 0; i < field.getDepth(); i++) {

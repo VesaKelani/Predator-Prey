@@ -1,8 +1,8 @@
 /**
  * Time during the simulation.
  *
- * @Vesa Kelani
- * @24/02/2020
+ * @author Vesa Kelani
+ * @version 24/02/2020
  */
 public class Time
 {

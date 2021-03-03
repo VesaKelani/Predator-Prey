@@ -1,8 +1,8 @@
 /**
  * A class representing the shared characteristics of all acting species.
  *
- * @Sumaiya Mohbubul and Vesa Kelani
- * @03/03/2021
+ * @author Sumaiya Mohbubul and Vesa Kelani
+ * @version 03/03/2021
  */
 public abstract class Actor
 {

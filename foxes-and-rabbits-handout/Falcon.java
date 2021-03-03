@@ -30,7 +30,7 @@ public class Falcon extends Animal
     // Individual characteristics (instance fields).
     // The falcon's age.
     private int age;
-    // The falcon's food level, which is increased by eating mouses and snakes.
+    // The falcon's food level, which is increased by eating mice and snakes.
     private int foodLevel;
     /**
      * Create a falcon. A falcon can be created as a new born (age zero
@@ -66,7 +66,7 @@ public class Falcon extends Animal
         if (isDay()) {
             incrementAge();
             incrementHunger();
-            if(isAlive() && currentWeather() != "Snow") {
+            if(isAlive() && !currentWeather().equals("Snow")){
                 giveBirth(newFalcons);
                 // Move towards a source of food if found.
                 Location newLocation = findFood();
@@ -84,9 +84,7 @@ public class Falcon extends Animal
                 }
             }
         }
-        else {
-            //sleep
-        }
+        //otherwise sleep
         foodLevel = halfFoodLevel(foodLevel);
         if (hasDisease()) {
             HPLoss(20);
@@ -210,15 +208,10 @@ public class Falcon extends Animal
         Iterator<Location> it = adjacent.iterator();
         while(it.hasNext()) {
             Location where = it.next();
-            Object adjacentOjbect = field.getObjectAt(where);
-            if(adjacentOjbect instanceof Falcon) {
-                Falcon mate = (Falcon) adjacentOjbect;
-                if(mate.getSex().equals(sex)) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
+            Object adjacentObject = field.getObjectAt(where);
+            if(adjacentObject instanceof Falcon) {
+                Falcon mate = (Falcon) adjacentObject;
+                return !mate.getSex().equals(sex);
             }
         }
         return false;

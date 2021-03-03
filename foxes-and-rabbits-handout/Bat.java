@@ -63,9 +63,9 @@ public class Bat extends Animal
      */
     public void act(List<Animal> newBats)
     {
-        if (isDay() == false) {
+        if (!isDay()) {
             incrementAge();
-            if(isAlive() && currentWeather() != "Rain") {
+            if(isAlive() && !currentWeather().equals("Rain")){
                 giveBirth(newBats);
                 // Move towards a source of food if found.
                 Location newLocation = getField().freeAdjacentLocation(getLocation());
@@ -78,9 +78,7 @@ public class Bat extends Animal
                 }
             }
         }
-        else {
-            //sleep
-        }
+        //otherwise sleep
         foodLevel = halfFoodLevel(foodLevel);
         if (hasDisease()) {
             HPLoss(20);
@@ -122,9 +120,9 @@ public class Bat extends Animal
         Iterator<Location> it = adjacent.iterator();
         while(it.hasNext()) {
             Location where = it.next();
-            Object plant = field.getObjectAt(where);
-            if(plant instanceof Flower) {
-                Insect insect = (Insect) plant;
+            Object food = field.getObjectAt(where);
+            if(food instanceof Insect) {
+                Insect insect = (Insect) food;
                 if(insect.isAlive()) {
                     insect.setDead();
                     foodLevel = INSECT_FOOD_VALUE;
@@ -192,15 +190,10 @@ public class Bat extends Animal
         Iterator<Location> it = adjacent.iterator();
         while(it.hasNext()) {
             Location where = it.next();
-            Object adjacentOjbect = field.getObjectAt(where);
-            if(adjacentOjbect instanceof Bat) {
-                Bat mate = (Bat) adjacentOjbect;
-                if(mate.getSex().equals(sex)) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
+            Object adjacentObject = field.getObjectAt(where);
+            if(adjacentObject instanceof Bat) {
+                Bat mate = (Bat) adjacentObject;
+                return !mate.getSex().equals(sex);
             }
         }
         return false;

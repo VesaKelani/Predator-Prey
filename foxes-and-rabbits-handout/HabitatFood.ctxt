@@ -14,6 +14,6 @@ comment4.params=food
 comment4.target=void\ act(java.util.List)
 comment4.text=\r\n\ Make\ this\ food\ species\ act\ -\ that\ is\:\ make\ it\ do\r\n\ whatever\ it\ wants/needs\ to\ do.\r\n\ @param\ food\ A\ list\ to\ receive\ newly\ born\ animals.*\ Abstract\ act\ method\ for\ all\ species.\r\n
 comment5.params=
-comment5.target=java.util.List\ findFreelocations()
+comment5.target=java.util.List\ findFreeLocations()
 comment5.text=\r\n\ find\ free\ locations\ within\ the\ field\r\n\ @return\ all\ free\ locations\ found.\r\n
 numComments=6
