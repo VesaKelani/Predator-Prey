@@ -67,8 +67,12 @@ public class Bat extends Animal
             incrementAge();
             if(isAlive() && !currentWeather().equals("Rain")){
                 giveBirth(newBats);
-                // Move towards a source of food if found.
-                Location newLocation = getField().freeAdjacentLocation(getLocation());
+                // Try to move into a free location.
+                Location newLocation = findFood();
+                if(newLocation == null) {
+                    // No food found - try to move to a free location.
+                    newLocation = getField().freeAdjacentLocation(getLocation());
+                }   
                 if(newLocation != null) {
                     setLocation(newLocation);
                 }
@@ -171,7 +175,7 @@ public class Bat extends Animal
 
     /**
      * A bat can breed if it has reached the breeding age.
-     @return true if the bat can breed, false otherwise.
+    @return true if the bat can breed, false otherwise.
      */
     public boolean canBreed()
     {

@@ -74,7 +74,7 @@ public class Mouse extends Animal
                 }
             }
         }
-        //otherwise sleep
+        //sleep
         if (hasDisease()) {
             HPLoss(20);
         }
@@ -158,7 +158,7 @@ public class Mouse extends Animal
      * A mouse can breed if it has reached the breeding age.
      * @return true if the mouse can breed, false otherwise.
      */
-    private boolean canBreed()
+    public boolean canBreed()
     {
         return age >= BREEDING_AGE;
     }
