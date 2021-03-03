@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * A simple model of a falcon.
- * Falcons age, move, eat mouses or snakes, and die.
+ * Falcons age, move, eat mice or snakes, and die.
  *
  * @author David J. Barnes, Michael Kölling, Sumaiya Mohbubul and Vesa Kelani.
  * @version 27.02.2021
@@ -116,7 +116,7 @@ public class Falcon extends Animal
     }
 
     /**
-     * Look for mouses and snakes adjacent to the current location.
+     * Look for mice and snakes adjacent to the current location.
      * Only the first live mouse or snake is eaten.
      * * if the mouse or snake has a disease, this is passed to the falcon.
      * @return Where food was found, or null if it wasn't.
