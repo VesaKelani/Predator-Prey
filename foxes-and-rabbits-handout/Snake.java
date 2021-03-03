@@ -10,16 +10,16 @@ public class Snake extends Animal
 {
     // Characteristics shared by all snakes (class variables).
     // The age at which a snake can start to breed.
-    private static final int BREEDING_AGE = 10;
+    private static final int BREEDING_AGE = 5;
     // The age to which a snake can live.
     private static final int MAX_AGE = 150;
     // The likelihood of a snake breeding.
-    private static final double BREEDING_PROBABILITY = 0.2;
+    private static final double BREEDING_PROBABILITY = 0.8;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 10;
     // The food value of a single mouse. In effect, this is the
     // number of steps a snake can go before it has to eat again.
-    private static final int MOUSE_FOOD_VALUE = 15;
+    private static final int MOUSE_FOOD_VALUE = 60;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 

@@ -38,9 +38,12 @@ public abstract class HabitatFood
      * @return If food will be diseased.
      */
     public boolean generateDisease() {
-        if(Math.random() > 0.5) {
-            hasDisease  = true;}
-        else {hasDisease = false;}
+        if(Math.random() > 0.65) {
+            hasDisease  = true;
+        }
+        else {
+            hasDisease = false;
+        }
         return hasDisease;
     }
     
@@ -132,4 +135,12 @@ public abstract class HabitatFood
         return free;
     }
 
+    /**
+     * Return the current weather.
+     * @return The current weather.
+     */
+    protected String currentWeather()
+    {
+        return WeatherState.getCurrentWeather();
+    }
 }

@@ -13,11 +13,11 @@ public class Mouse extends Animal
     // Characteristics shared by all mice (class variables).
 
     // The age at which a souse can start to breed.
-    private static final int BREEDING_AGE = 5;
+    private static final int BREEDING_AGE = 3;
     // The age to which a mouse can live.
     private static final int MAX_AGE = 30;
     // The likelihood of a mouse breeding.
-    private static final double BREEDING_PROBABILITY = 0.12;
+    private static final double BREEDING_PROBABILITY = 0.4;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
     // A shared random number generator to control breeding.

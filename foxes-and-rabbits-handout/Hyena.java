@@ -12,18 +12,17 @@ import java.util.Random;
 public class Hyena extends Animal
 {
     // Characteristics shared by all hyena's (class variables).
-
     // The age at which a hyena can start to breed.
-    private static final int BREEDING_AGE = 10;
+    private static final int BREEDING_AGE = 5;
     // The age to which a hyena can live.
     private static final int MAX_AGE = 150;
     // The likelihood of a hyena breeding.
-    private static final double BREEDING_PROBABILITY = 0.2;
+    private static final double BREEDING_PROBABILITY = 0.8;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 7;
     // The food value of a single mouse. In effect, this is the
     // number of steps a hyena can go before it has to eat again.
-    private static final int MOUSE_FOOD_VALUE = 20;
+    private static final int MOUSE_FOOD_VALUE = 50;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 

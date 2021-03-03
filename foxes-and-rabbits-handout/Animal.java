@@ -53,7 +53,7 @@ public abstract class Animal
      * @returns Decrease HP by a given number.
      */
     protected int HPLoss(int loss) {
-        HP -= 20;
+        HP -= loss;
         if (HP ==0) {
             setDead();
         }
@@ -74,8 +74,11 @@ public abstract class Animal
      */
     public String generateSex() {
         if(Math.random() > 0.5) {
-            sex  = "MALE";}
-        else {sex = "FEMALE";}
+            sex  = "MALE";
+        }
+        else {
+            sex = "FEMALE";
+        }
         return sex;
     }
 
@@ -103,7 +106,6 @@ public abstract class Animal
     {
         return alive;
     }
-
 
     /**
      * Indicate that the animal is no longer alive.

@@ -11,7 +11,7 @@ public class Insect extends HabitatFood
     // variables shared by all insects.
     private static final int MAX_AGE = 70;
     private static final Random rand = Randomizer.getRandom();
-    private static final double GROW_PROBABILITY = 0.02;
+    private static final double GROW_PROBABILITY = 0.01;
     private static final int MAX_INSECT_GROWN = 1;
     //each specific insect age.
     private int age;

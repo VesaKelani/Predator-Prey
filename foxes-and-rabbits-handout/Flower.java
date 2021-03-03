@@ -51,7 +51,7 @@ public class Flower extends HabitatFood
      */
     public void act(List<HabitatFood> newFlowers) {
         incrementAge(); 
-        if(isAlive() && WeatherState.getCurrentWeather() != "Rain") {
+        if(isAlive() && currentWeather() != "Rain") {
             growNewFlowers(newFlowers);
         } 
         else {

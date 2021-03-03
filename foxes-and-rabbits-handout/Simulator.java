@@ -21,21 +21,21 @@ public class Simulator
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 100;
     // The probability that a hyena will be created in any given grid position.
-    private static final double HYENA_CREATION_PROBABILITY = 0.02;
+    private static final double HYENA_CREATION_PROBABILITY = 0.06;
     // The probability that a mouse will be created in any given grid position.
     private static final double MOUSE_CREATION_PROBABILITY = 0.05;
     // The probability that a snake will be created in any given grid position.
-    private static final double SNAKE_CREATION_PROBABILITY = 0.02;
+    private static final double SNAKE_CREATION_PROBABILITY = 0.06;
     // The probability that a flower will be created in any given grid position.
     private static final double FLOWER_CREATION_PROBABILITY = 0.02;
     // The probability that a grass will be created in any given grid position.
-    private static final double GRASS_CREATION_PROBABILITY = 0.07;
+    private static final double GRASS_CREATION_PROBABILITY = 0.05;
     // The probability that a bat will be created in any given grid position.
     private static final double BAT_CREATION_PROBABILITY = 0.03;
     // The probability that a falcon will be created in any given grid position.
-    private static final double FALCON_CREATION_PROBABILITY = 0.03;
+    private static final double FALCON_CREATION_PROBABILITY = 0.06;
     // The probability that an insect will be created in any given grid position.
-    private static final double INSECT_CREATION_PROBABILITY = 0.01;
+    private static final double INSECT_CREATION_PROBABILITY = 0.02;
 
 
     // List of animals in the field.
@@ -191,15 +191,15 @@ public class Simulator
                     Hyena hyena = new Hyena(true, field, location);
                     animals.add(hyena);
                 }
-                else if(rand.nextDouble() <= MOUSE_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Mouse mouse = new Mouse(true, field, location);
-                    animals.add(mouse);
-                }
                 else if(rand.nextDouble() <= SNAKE_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Snake snake = new Snake(true, field, location);
                     animals.add(snake);
+                }
+                else if(rand.nextDouble() <= FALCON_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Falcon falcon = new Falcon(true, field, location);
+                    animals.add(falcon);
                 }
                 else if(rand.nextDouble() <= FLOWER_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
@@ -211,20 +211,20 @@ public class Simulator
                     Insect insect = new Insect(true, field, location);
                     habitatfood.add(insect);
                 }
-                else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Grass grass = new Grass(true, field, location);
-                    habitatfood.add(grass);
-                }
                 else if(rand.nextDouble() <= BAT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Bat bat = new Bat(true, field, location);
                     animals.add(bat);
                 }
-                else if(rand.nextDouble() <= FALCON_CREATION_PROBABILITY) {
+                else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Falcon falcon = new Falcon(true, field, location);
-                    animals.add(falcon);
+                    Grass grass = new Grass(true, field, location);
+                    habitatfood.add(grass);
+                }
+                else if(rand.nextDouble() <= MOUSE_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Mouse mouse = new Mouse(true, field, location);
+                    animals.add(mouse);
                 }
                 // else leave the location empty.
             }
