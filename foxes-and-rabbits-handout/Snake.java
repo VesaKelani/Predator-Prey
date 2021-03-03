@@ -26,11 +26,11 @@ public class Snake extends Animal
     // Individual characteristics (instance fields).
     // The snake's age.
     private int age;
-    // The snake's food level, which is increased by eating Mouses.
+    // The snake's food level, which is increased by eating mice.
     private int foodLevel;
     /**
      * Create a new snake. A snake may be created as a new born (age zero
-     * and not hungy) or with a random age and food level.
+     * and not hungry) or with a random age and food level.
      *
      * @param randomAge If true, the snake will have a random age and hunger level.
      * @param field The field currently occupied.
@@ -80,9 +80,7 @@ public class Snake extends Animal
                 }
             }
         }
-        else {
-            //sleep
-        }
+        //otherwise sleep
         foodLevel = halfFoodLevel(foodLevel);
         if (hasDisease()) {
             HPLoss(20);
@@ -194,15 +192,10 @@ public class Snake extends Animal
         Iterator<Location> it = adjacent.iterator();
         while(it.hasNext()) {
             Location where = it.next();
-            Object adjacentOjbect = field.getObjectAt(where);
-            if(adjacentOjbect instanceof Snake) {
-                Snake mate = (Snake) adjacentOjbect;
-                if(mate.getSex().equals(sex)) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
+            Object adjacentObject = field.getObjectAt(where);
+            if(adjacentObject instanceof Snake) {
+                Snake mate = (Snake) adjacentObject;
+                return !mate.getSex().equals(sex);
             }
         }
         return false;

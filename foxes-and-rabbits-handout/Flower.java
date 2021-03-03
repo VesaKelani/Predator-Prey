@@ -51,7 +51,7 @@ public class Flower extends HabitatFood
      */
     public void act(List<HabitatFood> newFlowers) {
         incrementAge(); 
-        if(isAlive() && currentWeather() != "Rain") {
+        if(isAlive() && !currentWeather().equals("Rain")) {
             growNewFlowers(newFlowers);
         } 
         else {
@@ -81,7 +81,7 @@ public class Flower extends HabitatFood
     private void growNewFlowers(List<HabitatFood> newFlowers) {
         int babyFlower = grow();
         Field field = getField();
-        List<Location> free = findFreelocations();
+        List<Location> free = findFreeLocations();
         for (int i = 0; i < babyFlower && free.size() > 0; i++) {
             Location loc = free.remove(0);
             Flower baby= new Flower(false, field, loc);
@@ -93,7 +93,7 @@ public class Flower extends HabitatFood
 
     /**
      * The total amount of flowers in the field.
-     * @return Total amound of flowers.
+     * @return Total amount of flowers.
      */ 
     public int getFlowerTotal() {
         Field field = getField();

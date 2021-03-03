@@ -13,7 +13,7 @@ public class Weather
     //The list of possible weather states.
     private ArrayList<String> weatherList;
     private Random rand = new Random();
-    //Set the weather wehn the simulator is first created.
+    //Set the weather when the simulator is first created.
     private String currentWeather = "Rain";
     
     /**

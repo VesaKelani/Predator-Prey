@@ -19,7 +19,7 @@ public class Insect extends HabitatFood
      * Create a new Insect. An insect may be created with age
      * zero (a new born) or with a random age.
      * 
-     * @param randomAge If true, the rabbiinsectt will have a random age.
+     * @param randomAge If true, the insectt will have a random age.
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
@@ -45,7 +45,7 @@ public class Insect extends HabitatFood
     }
     
     /**
-     *The insects's behaviour.
+     *The insect's behaviour.
      ** @param newInsects A list to return newly born flowers.
      */
     public void act(List<HabitatFood> newInsects)
@@ -76,7 +76,7 @@ public class Insect extends HabitatFood
     private void growNewInsects(List<HabitatFood> newInsects) {
         int babies = grow();
         Field field = getField();
-        List<Location> free = findFreelocations();
+        List<Location> free = findFreeLocations();
         for (int i = 0; i < babies && free.size() > 0; i++) {
             Location loc = free.remove(0);
             Insect baby= new Insect(false, field, loc);
@@ -88,7 +88,7 @@ public class Insect extends HabitatFood
     
     /**
      * The total amount of insects in the field.
-     * @return Total amound of insects.
+     * @return Total amount of insects.
      */ 
     public int getInsectTotal() {
         Field field = getField();

@@ -27,7 +27,6 @@ public class Mouse extends Animal
     // The mouse's age.
     private int age;
 
-
     /**
      * Create a new mouse. A mouse may be created with age
      * zero (a new born) or with a random age.
@@ -61,7 +60,11 @@ public class Mouse extends Animal
             if(isAlive()) {
                 giveBirth(newMice);
                 // Try to move into a free location.
-                Location newLocation = getField().freeAdjacentLocation(getLocation());
+                Location newLocation = findFood();
+                if(newLocation == null) {
+                    // No food found - try to move to a free location.
+                    newLocation = getField().freeAdjacentLocation(getLocation());
+                }   
                 if(newLocation != null) {
                     setLocation(newLocation);
                 }
@@ -71,14 +74,11 @@ public class Mouse extends Animal
                 }
             }
         }
-        else {
-            //sleep
-        }
+        //sleep
         if (hasDisease()) {
             HPLoss(20);
         }
     }
-
 
     /**
      * Increase the age.
@@ -124,7 +124,7 @@ public class Mouse extends Animal
         }
         return births;
     }
-    
+
     /**
      * Look for flowers adjacent to the current location.
      * Only the first live flower is eaten.
@@ -152,14 +152,13 @@ public class Mouse extends Animal
         }
         return null;
     }
-    
-    
+
 
     /**
      * A mouse can breed if it has reached the breeding age.
      * @return true if the mouse can breed, false otherwise.
      */
-    private boolean canBreed()
+    public boolean canBreed()
     {
         return age >= BREEDING_AGE;
     }
@@ -176,15 +175,10 @@ public class Mouse extends Animal
         Iterator<Location> it = adjacent.iterator();
         while(it.hasNext()) {
             Location where = it.next();
-            Object adjacentOjbect = field.getObjectAt(where);
-            if(adjacentOjbect instanceof Mouse) {
-                Mouse mate = (Mouse) adjacentOjbect;
-                if(mate.getSex().equals(sex)) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
+            Object adjacentObject = field.getObjectAt(where);
+            if(adjacentObject instanceof Mouse) {
+                Mouse mate = (Mouse) adjacentObject;
+                return !mate.getSex().equals(sex);
             }
         }
         return true;

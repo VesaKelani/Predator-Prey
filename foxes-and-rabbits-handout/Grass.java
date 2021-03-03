@@ -77,7 +77,7 @@ public class Grass extends HabitatFood
      */
     private void growNewGrass(List<HabitatFood> newGrass) {
         Field field = getField();
-        List<Location> free = findFreelocations();
+        List<Location> free = findFreeLocations();
         int babyGrass = grow();
         for (int i = 0; i < babyGrass && free.size() > 0; i++) {
             Location loc = free.remove(0);

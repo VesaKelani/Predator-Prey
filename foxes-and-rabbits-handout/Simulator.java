@@ -7,7 +7,7 @@ import java.awt.Color;
 /**
  * test*******************
  * A simple predator-prey simulator, based on a rectangular field
- * containing lots of animals and plants such as hyneas, bats, 
+ * containing lots of animals and plants such as hyenas, bats, 
  * and flowers.
  *
  * @author David J. Barnes and Michael Kölling
@@ -40,7 +40,7 @@ public class Simulator
 
     // List of animals in the field.
     private List<Animal> animals;
-    //list of habitatfood
+    //list of habitat food
     private List<HabitatFood> habitatfood;
     // The current state of the field.
     private Field field;
@@ -178,7 +178,7 @@ public class Simulator
     }
 
     /**
-     * Randomly populate the field with living orgaisms.
+     * Randomly populate the field with living organisms.
      */
     private void populate()
     {

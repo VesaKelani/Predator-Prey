@@ -18,5 +18,5 @@ comment5.target=void\ growNewFlowers(java.util.List)
 comment5.text=\r\n\ Grow\ new\ flowers\ in\ random\ free\ locations.\r\n\ @param\ List\ of\ new\ flowers\ to\ grow.\r\n
 comment6.params=
 comment6.target=int\ getFlowerTotal()
-comment6.text=\r\n\ The\ total\ amount\ of\ flowers\ in\ the\ field.\r\n\ @return\ Total\ amound\ of\ flowers.\r\n
+comment6.text=\r\n\ The\ total\ amount\ of\ flowers\ in\ the\ field.\r\n\ @return\ Total\ amount\ of\ flowers.\r\n
 numComments=7

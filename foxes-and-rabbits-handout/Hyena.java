@@ -68,7 +68,7 @@ public class Hyena extends Animal
         if (isDay()){
             incrementAge();
             incrementHunger();
-            if(isAlive() && currentWeather() != "Snow") {
+            if(isAlive() && !currentWeather().equals("Snow")){
                 giveBirth(newHyenas);
                 // Move towards a source of food if found.
                 Location newLocation = findFood();
@@ -86,9 +86,7 @@ public class Hyena extends Animal
                 }
             }
         }
-        else {
-            //sleep
-        }
+        //otherwise sleep
         foodLevel = halfFoodLevel(foodLevel);
         if (hasDisease()) {
             HPLoss(20);
@@ -203,12 +201,7 @@ public class Hyena extends Animal
             Object adjacentOjbect = field.getObjectAt(where);
             if(adjacentOjbect instanceof Hyena) {
                 Hyena mate = (Hyena) adjacentOjbect;
-                if(mate.getSex().equals(sex)) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
+                return !mate.getSex().equals(sex);
             }
         }
         return false;
