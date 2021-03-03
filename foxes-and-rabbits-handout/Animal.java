@@ -6,18 +6,10 @@ import java.util.List;
  * @author David J. Barnes, Michael Kölling, Sumaiya Mohbubul and Vesa Kelani.
  * @version 2016.02.29 (2)
  */
-public abstract class Animal
+public abstract class Animal extends Actor
 {
-    // Whether the animal is alive or not.
-    private boolean alive;
-    // The animal's field.
-    private Field field;
-    // The animal's position in the field.
-    private Location location;
-
     //animal's sex
     private String sex;
-    
     //if animal has caught a disease
     private boolean hasDisease;
     //health points
@@ -31,11 +23,9 @@ public abstract class Animal
      */
     public Animal(Field field, Location location)
     {
-        alive = true;
+        super(field, location);
         hasDisease = false;
         HP = 100;
-        this.field = field;
-        setLocation(location);
         sex = generateSex();
     }
     
@@ -99,75 +89,12 @@ public abstract class Animal
     abstract public void act(List<Animal> newAnimals);
 
     /**
-     * Check whether the animal is alive or not.
-     * @return true if the animal is still alive.
-     */
-    protected boolean isAlive()
-    {
-        return alive;
-    }
-
-    /**
-     * Indicate that the animal is no longer alive.
-     * It is removed from the field.
-     */
-    protected void setDead()
-    {
-        alive = false;
-        if(location != null) {
-            field.clear(location);
-            location = null;
-            field = null;
-        }
-    }
-
-    /**
-     * Return the animal's location.
-     * @return The animal's location.
-     */
-    protected Location getLocation()
-    {
-        return location;
-    }
-
-    /**
-     * Place the animal at the new location in the given field.
-     * @param newLocation The animal's new location.
-     */
-    protected void setLocation(Location newLocation)
-    {
-        if(location != null) {
-            field.clear(location);
-        }
-        location = newLocation;
-        field.place(this, newLocation);
-    }
-
-    /**
-     * Return the animal's field.
-     * @return The animal's field.
-     */
-    protected Field getField()
-    {
-        return field;
-    }
-
-    /**
      * Return whether it is daytime or not.
      * @return Whether it is daytime or not.
      */
     protected boolean isDay()
     {
       return Time.getIsDay();
-    }
-    
-    /**
-     * Return the current weather.
-     * @return The current weather.
-     */
-    protected String currentWeather()
-    {
-        return WeatherState.getCurrentWeather();
     }
     
     /**
